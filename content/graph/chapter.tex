@@ -1,0 +1,60 @@
+\chapter{Graph}
+
+\section{Fundamentals}
+	\trdimport{BellmanFord.h}
+	\trdimport{FloydWarshall.h}
+	\trdimport{TopoSort.h}
+
+\section{Network flow}
+	\trdimport{PushRelabel.h}
+	\trdimport{MinCostMaxFlow.h}
+	\trdimport{EdmondsKarp.h}
+	% \trdimport{Dinic.h}
+	\trdimport{MinCut.h}
+	\trdimport{GlobalMinCut.h}
+	\trdimport{GomoryHu.h}
+
+\section{Matching}
+	\trdimport{hopcroftKarp.h}
+	\trdimport{DFSMatching.h}
+	\trdimport{MinimumVertexCover.h}
+	\trdimport{WeightedMatching.h}
+	\trdimport{GeneralMatching.h}
+
+\section{DFS algorithms}
+	\trdimport{SCC.h}
+	\trdimport{BiconnectedComponents.h}
+	\trdimport{2sat.h}
+	\trdimport{EulerWalk.h}
+
+\section{Coloring}
+	\trdimport{EdgeColoring.h}
+
+\section{Heuristics}
+	\trdimport{MaximalCliques.h}
+	\trdimport{MaximumClique.h}
+	\trdimport{MaximumIndependentSet.h}
+
+\section{Trees}
+	\trdimport{BinaryLifting.h}
+	\trdimport{LCA.h}
+	\trdimport{CompressTree.h}
+	\trdimport{HLD.h}
+	\trdimport{LinkCutTree.h}
+	\trdimport{DirectedMST.h}
+
+\section{Math}
+	\subsection{Number of Spanning Trees}
+		% I.e. matrix-tree theorem.
+		% Source: https://en.wikipedia.org/wiki/Kirchhoff%27s_theorem
+		% Test: stress-tests/graph/matrix-tree.cpp
+		Create an $N\times N$ matrix \texttt{mat}, and for each edge $a \rightarrow b \in G$, do
+		\texttt{mat[a][b]--, mat[b][b]++} (and \texttt{mat[b][a]--, mat[a][a]++} if $G$ is undirected).
+		Remove the $i$th row and column and take the determinant; this yields the number of directed spanning trees rooted at $i$
+		(if $G$ is undirected, remove any row/column).
+
+	\subsection{Erdős–Gallai theorem}
+		% Source: https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Gallai_theorem
+		% Test: stress-tests/graph/erdos-gallai.cpp
+		A simple graph with node degrees $d_1 \ge \dots \ge d_n$ exists iff $d_1 + \dots + d_n$ is even and for every $k = 1\dots n$,
+		\[ \sum _{i=1}^{k}d_{i}\leq k(k-1)+\sum _{i=k+1}^{n}\min(d_{i},k). \]
