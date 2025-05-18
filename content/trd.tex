@@ -1,6 +1,51 @@
 \documentclass[9pt, a4paper, notitlepage]{extreport}
+% \usepackage{lua-visual-debug}
+\usepackage{pdfpages}
+
+% thanks zhongtang
+% https://github.com/zhtluo/cp-reference/blob/main/main.tex
+\usepackage{minted}
+\setlength\partopsep{-\topsep}
+
 \usepackage{trdpkg}
 \trdcontentdir{content}
+
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setromanfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont[
+	Path = {./fonts/},
+	Extension = .ttf,
+	UprightFont=SourceCodePro-Regular,
+	BoldFont=SourceCodePro-Bold,
+	Scale=0.8
+]{Source Code Pro}
+
+\newfontfamily\titlefont[
+	Path = {./fonts/},
+	Extension = .ttf
+]{Chivo-Black}
+
+\newfontfamily\smalltitle[
+	Path = {./fonts/},
+	Extension = .ttf
+]{Chivo-Bold}
+
+\titleformat*{\section}{\Large\smalltitle}
+\titleformat*{\subsection}{\large\smalltitle}
+\titleformat*{\subsubsection}{\normalsize\smalltitle}
+
+\setromanfont[
+	Path = {../fonts/},
+	Extension=.ttf,
+	UprightFont = *-Regular,
+	ItalicFont = *-Italic,
+	BoldFont = *-Bold,
+	BoldItalicFont = *-BoldItalic,
+]{SourceSans3}
 
 \university{Purdue}{Purdue University}{purdue}
 \team{Waffle Wizards}{Thomas Marlowe, Wilbert Chu, Robert Lee}
@@ -9,14 +54,27 @@
 % \enablecolors
 
 \begin{document}
-	\maketeampage
+	\setcounter{page}{0}
+	\includepdf{content/tex/cover.pdf}
+
+	\setminted{fontsize=\footnotesize}
+	\setminted{tabsize=2}
+	\setminted{breaklines}
+	\setminted{numbersep=1pt}
+	\setminted{xleftmargin=4pt}
+	\setminted{linenos}
+	\setminted{baselinestretch=0.8}
+	\renewcommand{\theFancyVerbLine}{\textcolor[HTML]{777b7d}{\footnotesize\arabic{FancyVerbLine}}}
+
 	% Small KACTL header on the first page:
 	% \maketitle{``One Last Time'' Edition}{\today}
+
+	\setlength\multicolsep{0pt}
 	\begin{multicols*}{3}
-	\thispagestyle{fancy}
 	% Table of contents, without subsections:
 	\setcounter{tocdepth}{0}
 	\tableofcontents
+	\thispagestyle{fancy}
 
 	\trdchapter{contest}
 	% \trdchapter{math}
@@ -30,7 +88,7 @@
 	% \trdchapter{various}
 	\end{multicols*}
 
-	\begin{multicols*}{3}
+	% \begin{multicols*}{3}
 	% \trdchapter{appendix}
-	\end{multicols*}
+	% \end{multicols*}
 \end{document}

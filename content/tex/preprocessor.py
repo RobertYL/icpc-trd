@@ -5,6 +5,7 @@
 # Credit: KACTL
 # License: CC0
 
+import os
 import sys
 import getopt
 import subprocess
@@ -147,8 +148,13 @@ def processwithcomments(caption, instream, outstream, listingslang):
     nsource = nsource.strip()
 
     if listingslang in ['C++', 'Java']:
-        hash_script = 'hash'
-        p = subprocess.Popen(['sh', 'content/contest/%s.sh' % hash_script], stdin=subprocess.PIPE, stdout=subprocess.PIPE, encoding="utf-8")
+        hash_script = "content/contest/hash.sh"
+        if os.path.exists("myhash.sh"):
+            hash_script = "myhash.sh"
+
+        p = subprocess.Popen(["sh", hash_script], stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE, encoding="utf-8")
+
         hsh, _ = p.communicate(nsource)
         hsh = hsh.split(None, 1)[0]
         hsh = hsh + ', '
@@ -174,10 +180,10 @@ def processwithcomments(caption, instream, outstream, listingslang):
             out.append(r"\leftcaption{%s}" % pathescape(", ".join(includelist)))
         if nsource:
             out.append(r"\rightcaption{%s%d lines}" % (hsh, len(nsource.split("\n"))))
-        langstr = ", language="+listingslang
-        out.append(r"\begin{lstlisting}[caption={%s}%s]" % (pathescape(caption), langstr))
+        out.append(r"\addlistingcaption")
+        out.append(r"\begin{minted}{%s}" % listingslang)
         out.append(nsource)
-        out.append(r"\end{lstlisting}")
+        out.append(r"\end{minted}")
 
     for line in out:
         print(line, file=outstream)
@@ -187,7 +193,8 @@ def processraw(caption, instream, outstream, listingslang = 'raw'):
         source = instream.read().strip()
         addref(caption, outstream)
         print(r"\rightcaption{%d lines}" % len(source.split("\n")), file=outstream)
-        print(r"\begin{lstlisting}[language=%s,caption={%s}]" % (listingslang, pathescape(caption)), file=outstream)
+        print(r"\addlistingcaption", file=outstream)
+        print(r"\begin{lstlisting}[language=%s,frame=none]" % listingslang, file=outstream)
         print(source, file=outstream)
         print(r"\end{lstlisting}", file=outstream)
     except:

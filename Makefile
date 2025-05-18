@@ -1,4 +1,4 @@
-LATEXCMD = pdflatex -shell-escape -output-directory build/
+LATEXCMD = lualatex -shell-escape -output-directory build/
 export TEXINPUTS=.:content/tex/:
 export max_print_line = 1048576
 
