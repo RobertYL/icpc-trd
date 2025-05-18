@@ -170,7 +170,6 @@
     \string^%
   \endgroup
 }
-\renewcommand*{\tilde}{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}
 
 % Fatter {} which are more distinguishable from ()
 % Makes pdf compile time 5-10% slower, but probably worth it still?
@@ -357,7 +356,7 @@
 	\ifthenelse{\boolean{hasusage}}{\codeheader{Usage}{\@defusage}}{}
 	\ifthenelse{\boolean{hasmemory}}{\codeheader{Memory}{\@defmemory}}{}
 	\ifthenelse{\boolean{hastime}}{\codeheader{Time}{\@deftime}}{}
-	\ifthenelse{\boolean{hasleftcaption}}{\vskip0pt}{\vskip-5pt}
+	\ifthenelse{\boolean{hasleftcaption}}{\vskip0pt}{\vskip-3pt}
 	\tiny
 	\texttt{\@leftcaption} \hfill \@rightcaption\vskip-\baselineskip
 	\hrulefill
