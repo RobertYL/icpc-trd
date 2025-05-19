@@ -4,7 +4,14 @@
 
 % thanks zhongtang
 % https://github.com/zhtluo/cp-reference/blob/main/main.tex
-\usepackage[outputdir=build]{minted}
+
+\makeatletter
+\usepackage{minted}
+\@ifpackagelater{minted}{2024-01-01}{}{
+	\usepackage[outputdir=build]{minted}
+}
+\makeatother
+
 \setlength\partopsep{-\topsep}
 
 \usepackage{trdpkg}
