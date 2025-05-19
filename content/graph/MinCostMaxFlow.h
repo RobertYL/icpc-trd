@@ -1,10 +1,8 @@
 /**
- * Author: Zhongtang Luo
+ * Author: zhtluo
  * Source: cp-reference
  * Description: Min-cost max-flow.
  * EK is better for sparse graphs, while ZKW is better for dense graphs.
- * Status: Tested on kattis:mincostmaxflow, stress-tested against another implementation
- * Time: ???
  */
 #pragma once
 

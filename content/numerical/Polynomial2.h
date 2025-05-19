@@ -1,5 +1,5 @@
 /**
- * Author: Zhongtang Luo
+ * Author: zhtluo
  * Description: \begin{enumerate}
  * \item \mintinline{cpp}|inverse|: Find a polynomial $b$ so that $a(x)b(x)\equiv 1\mod x^n\mod mod$.
  * $n$ must be a power of $2$. The max length of the array should be at least twice the actual length. 

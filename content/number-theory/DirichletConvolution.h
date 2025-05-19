@@ -1,5 +1,5 @@
 /**
-  * Author: Zhongtang Luo
+  * Author: zhtluo
   * Description: Define the Dirichlet convolution $f*g(n)$ as:
   * 
   * $$f*g(n)=\sum^n_{d=1}[d|n]f(n)g(\frac{n}{d})$$

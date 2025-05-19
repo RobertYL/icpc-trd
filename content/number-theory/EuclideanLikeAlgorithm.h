@@ -1,5 +1,5 @@
 /**
-  * Author: Zhongtang Luo
+  * Author: zhtluo
   * Description: Compute $\sum_{i=0}^{n-1}[\frac{a+bi}{m}]$.
   */
 long long solve(
