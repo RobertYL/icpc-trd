@@ -8,4 +8,4 @@ Build the TRD with `make trd`.
 
 ## Credit
 
-First and foremost, the majority of this TRD is credited to [KACTL](https://github.com/kth-competitive-programming/kactl) and zhtluo's [cp-reference](https://github.com/zhtluo/cp-reference).
+The majority of this TRD is credited to [KACTL](https://github.com/kth-competitive-programming/kactl) and Zhtluo's [cp-reference](https://github.com/zhtluo/cp-reference). Unattributed content (not ideal, I know) is probably taken from one of these two.

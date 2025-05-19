@@ -1,0 +1,797 @@
+\chapter{Math}
+
+\section{Lucas's theorem}
+
+For non-negative integers $m$ and $n$ and a prime $p$, the following congruence relation holds:
+
+$${\displaystyle {\binom {m}{n}}\equiv \prod _{i=0}^{k}{\binom {m_{i}}{n_{i}}}{\pmod {p}},}$$
+where
+
+$${\displaystyle m=m_{k}p^{k}+m_{k-1}p^{k-1}+\cdots +m_{1}p+m_{0},}$$
+and
+
+$${\displaystyle n=n_{k}p^{k}+n_{k-1}p^{k-1}+\cdots +n_{1}p+n_{0}}$$
+
+are the base p expansions of m and n respectively. This uses the convention that ${\displaystyle {\tbinom {m}{n}}=0}$ if $m < n$.
+
+\section{Group theory}
+	\subsection{Pólya enumeration theorem}
+		The enumeration theorem employs a multivariate generating function called the cycle index:
+		$$Z_{G}(t_{1},t_{2},\ldots ,t_{n})={\frac {1}{|G|}}\sum _{g\in G}t_{1}^{j_{1}(g)}t_{2}^{j_{2}(g)}\cdots t_{n}^{j_{n}(g)}\,,$$
+		where $n$ is the number of elements of $X$ and $j_k(g)$ is the number of $k$-cycles of the group element $g$ as a permutation of $X$.
+
+		The theorem states that the generating function F of the number of colored arrangements by weight is given by:
+		$$F(t)=Z_{G}(f(t),f(t^{2}),f(t^{3}),\ldots ,f(t^{n}))\,,$$
+		or in the multivariate case:
+		$$F(t_{1},\ldots )=Z_{G}(f(t_{1},\ldots ),f(t_{1}^{2},\ldots ),f(t_{1}^{3},\ldots ),\ldots ,f(t_{1}^{n},\ldots ))\,.$$
+
+		For instance, when seperating the graphs with the number of edges, we let $f(t)=1+t$, and examine the coefficient of $t^i$ for a graph with $i$ edges, and when seperating the necklaces with the number of beads with three different colors, we let $f(x,y,z)=x+y+z$, and examine the coefficient of $x^iy^jz^k$.
+
+\section{Game theory}
+\subsection{Nim}
+For simplicity, we denote $a_i$ as the number of stones in the $i$-th pile, $M_i(S)$ as removing stones with the amount chosen in the set $S$ from the $i$-th pile, and $M_i=M_i[1,a_i]$. Without further explanation, it is assumed that the SG function of a game $SG=\bigoplus_{i=1}^nSG(a_i)$.
+
+$M=\bigcup_{i=1}^nM_i$.
+
+Normal: $SG(n)=n$.
+
+Misere: The same, opposite if all piles are $1$'s.
+
+\subsection{Nim (powers)}
+Given $k$, $M=\bigcup_{i=1}^nM_i\{k^m|m\ge 0\}$.
+
+Normal: If $k$ is odd, $SG(n)=n\%2$. Otherwise,
+
+$$SG(n)=\biggl\{\begin{array}{lr}
+2 & n\%(k+1)=k \\
+n\%(k+1)\%2 & \mathrm{otherwise}\,.\end{array}$$
+
+\subsection{Nim (no greater than half)}
+$M=\bigcup_{i=1}^nM_i[1,\frac{a_i}{2}]$.
+
+Normal: $SG(2n)=n,SG(2n+1)=SG(n)$.
+
+\subsection{Nim (always greater than half)}
+$M=\bigcup_{i=1}^nM_i[\left\lceil \frac{a_i}{2}\right\rceil, a_i]$.
+
+Normal: $SG(0)=0,SG(n)=\left\lfloor \log_2 n\right\rfloor +1$.
+
+\subsection{Nim (proper divisors)}
+$M=\bigcup_{i=1}^nM_i\{x|x>1\wedge a_i\% x=0\}$.
+
+Normal: $SG(1)=0,SG(n)=\max_x(n\%2^x=0)$.
+
+\subsection{Nim (divisors)}
+$M=\bigcup_{i=1}^nM_i\{x|a_i\% x=0\}$.
+
+Normal: $SG(0)=0,SG(n)=1+\max_x(n\%2^x=0)$.
+
+\subsection{Nim (fixed)}
+Given a finite set $S$, $M=\bigcup_{i=1}^nM_i(S)$.
+
+Normal: $SG_1(n)$ is eventually periodic.
+
+Given a finite set $S$, $M=\bigcup_{i=1}^nM_i(S\cup {a_i})$.
+
+Normal: $SG_2(n)=SG_1(n)+1$.
+
+\subsection{Moore's Nim}
+Given $k$, $M=\bigcup\{M_{x_1}\times M_{x_2} \dots\times M_{x_l}|l\le k \wedge\forall i(x_i<x_{i+1})\}$.
+
+Normal: Sum all $(a_i)_2$ in base $k+1$ without carry. Lose if the result is $0$.
+
+Misere: The same, except if all piles are $1$'s.
+
+\subsection{Staircase Nim}
+One can take any number of objects from $a_{i+1}$ to $a_i$($i\ge 0$).
+
+Normal: Lose if $\bigoplus_{i=0}^{(n-1)/2}a_{2i+1}=0$.
+
+\subsection{Lasker's Nim}
+$M=\bigcup_{i=1}^nM_i\cup S_i$. ($S_i$: Split a pile into two non-empty piles.)
+
+Normal: $SG(n)=\biggl\{\begin{array}{lr}
+n & n\%4=1,2\\
+n+1 & n\%4=3\\
+n-1 & n\%4=0\,.\end{array}$
+
+\subsection{Kayles}
+$M=\bigcup_{i=1}^nM_i[1,2]\cup MS_i[1,2]$. ($MS_i$: Split a pile into two non-empty piles after removing stones.)
+
+Normal: Periodic from the $72$-th item with period length $12$.
+
+\subsection{Dawson's chess}
+$n$ stones in a line. One can take a stone if its neighbours are not taken.
+
+Normal: Periodic from the $52$-th item with period length $34$.
+
+\subsection{Ferguson game}
+Two boxes with $m$ stones and $n$ stones. One can empty any one box and move any positive number of stones from another box to this box each step.
+
+Normal: Lose if both $m$ and $n$ are odd.
+
+\subsection{Fibonacci game}
+$n$ stones. The first player may take any positive number of stones during the first move, but not all of them. After that, each player may take any positive number of stones, but less than twice the number of stones taken during the last turn.
+
+Normal: Win if $n$ is not a fibonacci number.
+
+\subsection{Wythoff's game}
+Two piles of stones. Players take turns removing stones from one or both piles; when removing stones from both piles, the numbers of stones removed from each pile must be equal.
+
+Normal: Lose if $\floor*{\frac{\sqrt{5}+1}{2}|A-B|}=\min(A,B)$
+
+\subsection{Mock turtles}
+$n$ coins in a line. One can turn over any $1$, $2$, or $3$ coins, but the rightmost coin turned must be from head to tail.
+
+Normal: $SG(n)=2n+[\operatorname{popcount}(n)\mathrm{\ is\ even}]$.
+
+\subsection{Ruler}
+$n$ coins in a line. One can turn over any consecutive coins, but the rightmost coin turned must be from head to tail.
+
+Normal: $SG(n)=\operatorname{lowbit}(n)$.
+
+\subsection{Hackenbush}
+The game starts with the players drawing a ground line (conventionally, but not necessarily, a horizontal line at the bottom of the paper or other playing area) and several line segments such that each line segment is connected to the ground, either directly at an endpoint, or indirectly, via a chain of other segments connected by endpoints. Any number of segments may meet at a point and thus there may be multiple paths to ground.
+
+On his turn, a player cuts (erases) any line segment of his choice. Every line segment no longer connected to the ground by any path falls (i.e., gets erased). According to the normal play convention of combinatorial game theory, the first player who is unable to move loses.
+
+Played exclusively with vertical stacks of line segments, also referred to as bamboo stalks, the game directly becomes Nim and can be directly analyzed as such. Divergent segments, or trees, add an additional wrinkle to the game and require use of the colon principle stating that when branches come together at a vertex, one may replace the branches by a non-branching stalk of length equal to their nim sum. This principle changes the representation of the game to the more basic version of the bamboo stalks. The last possible set of graphs that can be made are convergent ones, also known as arbitrarily rooted graphs. By using the fusion principle, we can state that all vertices on any cycle may be fused together without changing the value of the graph. Therefore, any convergent graph can also be interpreted as a simple bamboo stalk graph. By combining all three types of graphs we can add complexity to the game, without ever changing the Nim sum of the game, thereby allowing the game to take the strategies of Nim.
+
+\subsection{Joseph cycle}
+$n$ players are numbered with $0,1,2,...,n-1$. $f_{1,m}=0,f_{n,m}=(f_{n-1,m}+m)\mod n$.
+
+\subsection{Some highly composite numbers}
+120: 16, 1260: 36, 10080: 72, 110880: 144, 1081080: 256, 1102701600: 1440
+
+\section{Probability theory}
+Let $X$ be a discrete random variable with probability $p_X(x)$ of assuming the value $x$. It will then have an expected value (mean) $\mu=\mathbb{E}(X)=\sum_xxp_X(x)$ and variance $\sigma^2=V(X)=\mathbb{E}(X^2)-(\mathbb{E}(X))^2=\sum_x(x-\mathbb{E}(X))^2p_X(x)$ where $\sigma$ is the standard deviation. If $X$ is instead continuous it will have a probability density function $f_X(x)$ and the sums above will instead be integrals with $p_X(x)$ replaced by $f_X(x)$.
+
+Expectation is linear:
+\[\mathbb{E}(aX+bY) = a\mathbb{E}(X)+b\mathbb{E}(Y)\]
+For independent $X$ and $Y$, \[V(aX+bY) = a^2V(X)+b^2V(Y).\]
+
+\subsection{Discrete distributions}
+
+\subsection{Binomial distribution}
+The number of successes in $n$ independent yes/no experiments, each which yields success with probability $p$ is $\textrm{Bin}(n,p),\,n=1,2,\dots,\, 0\leq p\leq1$.
+\[p(k)=\binom{n}{k}p^k(1-p)^{n-k}\]
+\[\mu = np,\,\sigma^2=np(1-p)\]
+$\textrm{Bin}(n,p)$ is approximately $\textrm{Po}(np)$ for small $p$.
+
+\subsection{First success distribution}
+The number of trials needed to get the first success in independent yes/no experiments, each which yields success with probability $p$ is $\textrm{Fs}(p),\,0\leq p\leq1$.
+\[p(k)=p(1-p)^{k-1},\,k=1,2,\dots\]
+\[\mu = \frac1p,\,\sigma^2=\frac{1-p}{p^2}\]
+
+\subsection{Poisson distribution}
+The number of events occurring in a fixed period of time $t$ if these events occur with a known average rate $\kappa$ and independently of the time since the last event is $\textrm{Po}(\lambda),\,\lambda=t\kappa$.
+\[p(k)=e^{-\lambda}\frac{\lambda^k}{k!}, k=0,1,2,\dots\]
+\[\mu=\lambda,\,\sigma^2=\lambda\]
+
+\subsection{Continuous distributions}
+
+\subsection{Uniform distribution}
+If the probability density function is constant between $a$ and $b$ and 0 elsewhere it is $\textrm{U}(a,b),\,a<b$.
+\[f(x) = \left\{
+\begin{array}{cl}
+\frac{1}{b-a} & a<x<b\\
+0 & \textrm{otherwise}
+\end{array}\right.\]
+\[\mu=\frac{a+b}{2},\,\sigma^2=\frac{(b-a)^2}{12}\]
+
+\subsection{Exponential distribution}
+The time between events in a Poisson process is $\textrm{Exp}(\lambda),\,\lambda>0$.
+\[f(x) = \left\{
+\begin{array}{cl}
+\lambda e^{-\lambda x} & x\geq0\\
+0 & x<0
+\end{array}\right.\]
+\[\mu=\frac{1}{\lambda},\,\sigma^2=\frac{1}{\lambda^2}\]
+
+\subsection{Normal distribution}
+Most real random values with mean $\mu$ and variance $\sigma^2$ are well described by $\mathcal{N}(\mu,\sigma^2),\,\sigma>0$.
+\[ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \]
+If $X_1 \sim \mathcal{N}(\mu_1,\sigma_1^2)$ and $X_2 \sim \mathcal{N}(\mu_2,\sigma_2^2)$ then
+\[ aX_1 + bX_2 + c \sim \mathcal{N}(\mu_1+\mu_2+c,a^2\sigma_1^2+b^2\sigma_2^2) \]
+
+\section{Markov chains}
+A \emph{Markov chain} is a discrete random process with the property that the next state depends only on the current state.
+Let $X_1,X_2,\ldots$ be a sequence of random variables generated by the Markov process.
+Then there is a transition matrix $\mathbf{P} = (p_{ij})$, with $p_{ij} = \Pr(X_n = i | X_{n-1} = j)$,
+and $\mathbf{p}^{(n)} = \mathbf P^n \mathbf p^{(0)}$ is the probability distribution for $X_n$ (i.e., $p^{(n)}_i = \Pr(X_n = i)$),
+where $\mathbf{p}^{(0)}$ is the initial distribution.
+
+% \subsection{Stationary distribution}
+$\mathbf{\pi}$ is a stationary distribution if $\mathbf{\pi} = \mathbf{\pi P}$.
+If the Markov chain is \emph{irreducible} (it is possible to get to any state from any state),
+then $\pi_i = \frac{1}{\mathbb{E}(T_i)}$ where $\mathbb{E}(T_i)$  is the expected time between two visits in state $i$.
+$\pi_j/\pi_i$ is the expected number of visits in state $j$ between two visits in state $i$.
+
+For a connected, undirected and non-bipartite graph, where the transition probability is uniform among all neighbors, $\pi_i$ is proportional to node $i$'s degree.
+
+% \subsection{Ergodicity}
+A Markov chain is \emph{ergodic} if the asymptotic distribution is independent of the initial distribution.
+A finite Markov chain is ergodic iff it is irreducible and \emph{aperiodic} (i.e., the gcd of cycle lengths is 1).
+$\lim_{k\rightarrow\infty}\mathbf{P}^k = \mathbf{1}\pi$.
+
+% \subsection{Absorption}
+A Markov chain is an A-chain if the states can be partitioned into two sets $\mathbf{A}$ and $\mathbf{G}$, such that all states in $\mathbf{A}$ are absorbing ($p_{ii}=1$), and all states in $\mathbf{G}$ leads to an absorbing state in $\mathbf{A}$.
+The probability for absorption in state $i\in\mathbf{A}$, when the initial state is $j$, is $a_{ij} = p_{ij}+\sum_{k\in\mathbf{G}} a_{ik}p_{kj}$.
+The expected time until absorption, when the initial state is $i$, is $t_i = 1+\sum_{k\in\mathbf{G}}p_{ki}t_k$.
+
+\section{Formulas}
+	\subsection{Binomial coefficients}
+	\[ {n \choose k} = (-1)^k{k-n-1 \choose k},\ \ \sum_{k \leq n}{r+k \choose k} = {r+n+1 \choose n} \]
+	\[ \sum_{k=0}^n{k \choose m} = {n+1 \choose m+1} \]
+	\[ \sqrt{1+z} = 1 + \sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k\times2^{2k-1}}{2k-2 \choose k-1}z^k \]
+	\[ \sum_{k=0}^{r}{r-k \choose m}{s+k \choose n} = {r+s+1 \choose m+n+1} \]
+	\[ C_{n, m} = {n+m \choose m} - {n+m \choose m-1}, n \geq m \]
+	\[ {n \choose k} \equiv [n\& k=k] \pmod 2 \]
+	\[ {{n_1+\cdots+n_p}\choose m}=\sum_{k_1+\cdots+k_p=m}{n_1\choose k_1}\cdots{n_p\choose k_p}\]
+	\subsection{Fibonacci numbers}
+	\[ F(z) = \frac{z}{1-z-z^2} \]
+	\[ f_n = \frac{{\phi}^n-{\hat{\phi}}^n}{\sqrt{5}}, \phi = \frac{1+\sqrt{5}}{2},
+	\hat{\phi} = \frac{1-\sqrt{5}}{2} \]
+	\[ \sum_{k=1}^nf_k = f_{n+2}-1,\ \ \sum_{k=1}^nf^2_k = f_nf_{n+1} \]
+	\[ \sum_{k=0}^nf_kf_{n-k} = \frac{1}{5}(n-1)f_n+\frac{2}{5}nf_{n-1} \]
+	\[ \frac{f_{2n}}{f_n} = f_{n-1} + f_{n+1}\]
+	\[ f_1+2f_2+3f_3+\cdots+nf_n=nf_{n+2}-f_{n+3}+2]\]
+	\[ \gcd(f_m,f_n)=f_{\gcd(m,n)}\]
+	\[ f^2_n + (-1)^n = f_{n+1}f_{n-1} \]
+	\[ f_{n+k} = f_nf_{k+1} + f_{n-1}f_k \]
+	\[ f_{2n+1} = f^2_n+f^2_{n+1} \]
+	\[ (-1)^kf_{n-k} = f_{n}f_{k-1} - f_{n-1}f_{k} \]
+	\[ \text{Modulo }f_n, f_{mn+r} \equiv \left\{
+	\begin{aligned}
+	&f_r,& m \bmod 4 = 0; \\
+	&(-1)^{r+1}f_{n-r},& m \bmod 4 = 1; \\
+	&(-1)^nf_r,& m \bmod 4 = 2; \\
+	&(-1)^{r+1+n}f_{n-r},& m \bmod 4 = 3.
+	\end{aligned}
+	\right.
+	\]
+
+	Period modulo a prime $p$ is a factor of $2p+2$ or $p-1$.
+
+	Only exception: $G(5)=20$.
+
+	Period modulo the power of a prime $p^k$: $G(p^k)=G(p)p^{k-1}$.
+
+	Period modulo $n=p_1^{k_1}...p_m^{k_m}$: $G(n)=lcm(G(p_1^{k_1}),...,G(p_m^{k_m}))$.
+
+	\subsection{Lucas numbers}
+	\[ L_0=2,L_1=1,L_n=L_{n-1}+L_{n-2}=(\frac{1+\sqrt{5}}{2})^n+\frac{1-\sqrt{5}}{2})^n \]
+	\[ L(x)=\frac{2-x}{1-x-x^2} \]
+	\subsection{Catalan numbers}
+	\begin{align*}
+	c_1=1,c_n=\sum_{i=0}^{n-1}c_ic_{n-1-i}=c_{n-1}\frac{4n-2}{n+1}=\frac{\binom{2n}{n}}{n+1}\\
+	=\binom{2n}{n}-\binom{2n}{n-1}, c(x)=\frac{1-\sqrt{1-4x}}{2x}
+	\end{align*}
+	\subsection{Stirling cycle numbers}
+	Divide $n$ elements into $k$ non-empty cycles.
+	\[s(n,0)=0,s(n,n)=1,s(n+1,k)=s(n,k-1)-ns(n,k)\]
+	\[s(n,k)=(-1)^{n-k}{n \brack k}\]
+	\[{n+1 \brack k} = n{n \brack k} + {n \brack k-1},{n+1 \brack 2} = n!H_n\]
+	\begin{align*}
+	x^{\underline{n}} = x(x-1)...(x-n+1) &= \sum_{k=0}^n{ {n \brack k}(-1)^{n-k}x^k }\\
+	x^{\overline{n}} = x(x+1)...(x+n-1) &= \sum_{k=0}^n{ {n \brack k}x^k }\\
+	\end{align*}
+	\subsection{Stirling subset numbers}
+	Divide $n$ elements into $k$ non-empty subsets.
+	\[ {n+1 \brace k} = k{n \brace k} + {n \brace k-1} \]
+	\[ x^n = \sum_{k=0}^n{ {n \brace k}x^{\underline{k}} } = \sum_{k=0}^n{ {n \brace k}(-1)^{n-k}x^{\overline{k}} } \]
+	\[ m!{n \brace m} = \sum_{k=0}^m{m \choose k}k^n(-1)^{m-k} \]
+	\[ \sum_{k=1}^nk^p = \sum_{k=0}^p{p \brace k}(n+1)^{\underline{k}} \]
+	For a fixed $k$, generating functions :
+	\[\sum_{n=0}^{\infty}{n \brace k}x^{n-k}=\prod_{r=1}^{k}\frac{1}{1-rx}\]
+	\subsection{Motzkin numbers}
+	Draw non-intersecting chords between n points on a circle.
+
+	Pick $n$ numbers $k_1,k_2,...,k_n\in\{-1,0,1\}$ so that $\sum_i^ak_i(1\leq a\leq n)$ is non-negative and the sum of all numbers is $0$.
+	\[M_{n+1}=M_n+\sum_i^{n-1}M_iM_{n-1-i}=\frac{(2n+3)M_n+3nM_{n-1}}{n+3}\]
+	\[M_n=\sum_{i=0}^{\lfloor \frac{n}{2}\rfloor}\binom{n}{2k}Catlan(k)\]
+	\[M(X)=\frac{1-x-\sqrt{1-2x-3x^2}}{2x^2}\]
+	\subsection{Eulerian numbers}
+
+	\def \bangle{ \atopwithdelims \langle \rangle}
+
+	Permutations of the numbers $1$ to $n$ in which exactly $k$ elements are greater than the previous element.
+	\[ {n \bangle k} = (k+1){n-1 \bangle k} + (n-k){n-1 \bangle k-1} \]
+	\[ x^n = \sum_k{ {n \bangle k}{x+k \choose n} } \]
+	\[ {n \bangle m} = \sum_{k=0}^m{n+1 \choose k}(m+1-k)^n(-1)^k \]
+	\subsection{Harmonic numbers}
+	Sum of the reciprocals of the first n natural numbers.
+	\[ \sum_{k=1}^nH_k = (n+1)H_n-n \]
+	\[ \sum_{k=1}^nkH_k = \frac{n(n+1)}{2}H_n - \frac{n(n-1)}{4} \]
+	\[ \sum_{k=1}^n{k \choose m}H_k = {n+1 \choose m+1}(H_{n+1} - \frac{1}{m+1}) \]
+	\subsection{Pentagonal number theorem}
+	\[ \prod_{n=1}^{\infty}(1-x^n) = \sum_{n=-\infty}^{\infty}{(-1)^kx^{k(3k-1)/2}} \]
+	\[ p(n) = p(n-1)+p(n-2)-p(n-5)-p(n-7)+\cdots \]
+	\[ f(n, k) = p(n)-p(n-k)-p(n-2k)+p(n-5k)+p(n-7k)-\cdots \]
+	\subsection{Bell numbers}
+	Divide a set that has exactly n elements.
+	\[ B_n=\sum_{k=1}^{n}{n\brace k},\ \ B_{n+1} = \sum_{k=0}^n{n \choose k}B_k \]
+	\[ B_{p^m+n} \equiv mB_n+B_{n+1} \pmod{p} \]
+	\[B(x)=\sum_{n=0}^{\infty}\frac{B_n}{n!}x^n=\mathrm{e}^{\mathrm{e}^x-1}\]
+	\subsection{Bernoulli numbers}
+	\[ B_n = 1 - \sum_{k=0}^{n-1}{n \choose k}\frac{B_k}{n-k+1} \]
+	\[ G(x) = \sum_{k=0}^{\infty}\frac{B_k}{k!}x^k
+	= \frac{1}{\sum_{k=0}^{\infty}\frac{x^k}{(k+1)!}} \]
+	\[ \sum_{k=1}^nk^m = \frac{1}{m+1}\sum_{k=0}^m{m+1 \choose k}B_kn^{m-k+1} \]
+	\subsection{Sum of powers}
+	\[\sum_{i=1}^ni^2=\frac{n(n+1)(2n+1)}{6},\ \ \sum_{i=1}^ni^3=(\frac{n(n+1)}{2})^2\]
+	\[\sum_{i=1}^ni^4=\frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}\]
+	\[\sum_{i=1}^ni^5=\frac{n^2(n+1)^2(2n^2+2n-1)}{12}\]
+	\subsection{Sum of squares}
+	Denote $r_k(n)$ the ways to form $n$ with $k$ squares. If :
+	\[n=2^{a_0}p_1^{2a_1}\cdots p_r^{2a_r}q_1{b_1}\cdots q_s{b_s}\]
+	where $p_i\equiv 3 \mod 4$, $q_i\equiv 1 \mod 4$, then
+	\[r_2(n)=\left\{\begin{aligned}
+	& 0 & \text{if any }a_i\text{ is a half-integer}\\
+	& 4\prod_1^r(b_i+1) & \text{if all }a_i\text{ are integers}\\
+	\end{aligned}\right.\]
+	$r_3(n)>0$ when and only when $n$ is not $4^a(8b+7)$.
+	\subsection{Derangement}
+	\[D_1=0,D_2=1,D_n=n!(\frac{1}{0!}-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+...+\frac{(-1)^n}{n!})\]
+	\[D_n=(n-1)(D_{n-1}+D_{n-2})\]
+	\subsection{Labeled unrooted trees}
+		\# on $n$ vertices: $n^{n-2}$ \\
+		\# on $k$ existing trees of size $n_i$: $n_1n_2\cdots n_k n^{k-2}$ \\
+		\# with degrees $d_i$: $(n-2)! / ((d_1-1)! \cdots (d_n-1)!)$
+	\subsection{Tetrahedron volume}
+	If $U$, $V$, $W$, $u$, $v$, $w$ are lengths of edges of the tetrahedron (first three form a triangle; u opposite to U and so on)
+	\[ V = \frac{\sqrt{ 4u^2v^2w^2 - \sum_{cyc}{u^2(v^2+w^2-U^2)^2} + \prod_{cyc}{(v^2+w^2-U^2)} }}{12} \]
+
+\section{Integrals}
+	$$\int_Lf(x,y,z)\mathrm{d}s=\int_\alpha^\beta f(x(t),y(t),z(t))\sqrt{x'^2(t)+y'^2(t)+z'^2(t)}\mathrm{d}t$$
+
+	$$\iint_\Sigma f(x,y,z)\mathrm{d}S=\iint_D f(x(u,v),y(u,v),z(u,v))\sqrt{EG-F^2}\mathrm{d}u\mathrm{d}v\,,$$
+	where $E=x_u^2+y_u^2+z_u^2,F=x_ux_v+y_uy_v+z_uz_v,G=x_v^2+y_v^2+z_v^2$.
+
+	\begin{align*}
+	&\int_L P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)\mathrm{d}z\\
+	=&\int_a^b[P(x(t),y(t),z(t))x'(t)+Q(x(t),y(t),z(t))y'(t)+\\
+	&R(x(t),y(t),z(t))z'(t)]\mathrm{d}t
+	\end{align*}
+
+	\begin{align*}
+	&\iint_L P(x,y,z)\mathrm{d}y\mathrm{d}z+Q(x,y,z)\mathrm{d}z\mathrm{d}x+R(x,y,z)\mathrm{d}x\mathrm{d}y\\
+	=&\pm \iint_D[P(x(u,v),y(u,v),z(u,v))\frac{\partial(y,z)}{\partial(u,v)}+\\
+	&Q(x(u,v),y(u,v),z(u,v))\frac{\partial(z,x)}{\partial(u,v)}+\\
+	&R(x(u,v),y(u,v),z(u,v))\frac{\partial(x,y)}{\partial(u,v)}]\mathrm{d}u\mathrm{d}v
+	\end{align*}
+
+	\subsection{Variable substitution}
+	$$\iint_{T(D)}f(x,y)\mathrm{d}x\mathrm{d}y=\iint_{D}f(x(u,v),y(u,v))\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\mathrm{d}u\mathrm{d}v$$
+	\subsection{Substitution with polar coordinates}
+	$$x=r\cos\theta,y=r\sin\theta$$
+	$$\left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|=r$$
+	\subsection{Substitution with cylindrical coordinates}
+	$$x=r\cos\theta,y=r\sin\theta,z=z$$
+	$$\left|\frac{\partial(x,y,z)}{\partial(r,\theta,z)}\right|=r$$
+	\subsection{Substitution with spherical coordinates}
+	$$x=r\sin\varphi\cos\theta,y=r\sin\varphi\sin\theta,z=r\cos\varphi$$
+	$$\left|\frac{\partial(x,y,z)}{\partial(r,\varphi,\theta)}\right|=r^2\sin\varphi$$
+
+\subsection{Differentiation}
+	\def\sinh{\mathop{\rm sinh}\nolimits}
+	\def\cosh{\mathop{\rm cosh}\nolimits}
+	\def\sech{\mathop{\rm sech}\nolimits}
+	\def\csch{\mathop{\rm csch}\nolimits}
+	\def\coth{\mathop{\rm coth}\nolimits}
+	\def\tanh{\mathop{\rm tanh}\nolimits}
+
+	\def\arccot{\mathop{\rm arccot}\nolimits}
+	\def\arcsec{\mathop{\rm arcsec}\nolimits}
+	\def\arccsc{\mathop{\rm arccsc}\nolimits}
+	\def\arcsinh{\mathop{\rm arcsinh}\nolimits}
+	\def\arccosh{\mathop{\rm arccosh}\nolimits}
+	\def\arctanh{\mathop{\rm arctanh}\nolimits}
+	\def\arccoth{\mathop{\rm arccoth}\nolimits}
+	\def\arcsech{\mathop{\rm arcsech}\nolimits}
+	\def\arccsch{\mathop{\rm arccsch}\nolimits}
+	\begin{flushleft}
+	\begin{multicols}{2}
+		$ (\frac{u}{v})' = \frac{u'v - uv'}{v^2} $ \\
+		$ (a^x)' = (\ln a) a^x $ \\
+		$ (\tan x)' = \sec^2 x $ \\
+		$ (\cot x)' = \csc^2 x $ \\
+		$ (\sec x)' = \tan x\, \sec x $ \\
+		$ (\csc x)' = - \cot x\, \csc x $ \\
+		$ (\arcsin x)' = {1 \over \sqrt{1-x^2}} $ \\
+		$ (\arccos x)' = -{1 \over \sqrt{1-x^2}} $ \\
+		$ (\arctan x)' = {1 \over 1+x^2} $ \\
+		$ (\arccot x)' = -{1 \over 1+x^2} $ \\
+		$ (\arccsc x)' = -{1 \over x \sqrt{1-x^2}} $ \\
+		$ (\arcsec x)' = {1 \over x \sqrt{1-x^2}} $ \\
+		$ (\tanh x)' = \sech^2 x $ \\
+		$ (\coth x)' = -\csch^2 x $ \\
+		$ (\sech x)' = -\sech x \, \tanh x $ \\
+		$ (\csch x)' = -\csch x \, \coth x $ \\
+		$ (\arcsinh x)' = {1 \over \sqrt{1+x^2}} $ \\
+		$ (\arccosh x)' = {1 \over \sqrt{x^2-1}} $ \\
+		$ (\arctanh x)' = {1 \over 1-x^2} $ \\
+		$ (\arccoth x)' = {1 \over x^2-1} $ \\
+		$ (\arccsch x)' = -{1 \over \vert x \vert \sqrt{1+x^2}} $ \\
+		$ (\arcsech x)' = -{1 \over x \sqrt{1-x^2}} $ \\
+	\end{multicols}
+	\end{flushleft}
+\newcommand{\md}{\mathrm{d}}
+\newcommand{\me}{\mathrm{e}}
+\subsection{Integration}
+
+	\subsection{$ax+b$ ($a\neq 0$)}
+	\begin{enumerate}
+
+	\item $ \int \frac{x}{ax+b} \md x = \frac{1}{a^2} (ax+b-b\ln|ax+b|) + C $
+
+	\item $ \int \frac{x^2}{ax+b} \md x = \frac{1}{a^3} \left( \frac{1}{2}(ax+b)^2-2b(ax+b)+b^2\ln|ax+b| \right) + C $
+
+	\item $ \int \frac{\md x}{x(ax+b)} = -\frac{1}{b}\ln \left| \frac{ax+b}{x} \right| + C $
+
+	\item $ \int \frac{\md x}{x^2(ax+b)} = -\frac{1}{bx} + \frac{a}{b^2}\ln\left| \frac{ax+b}{x} \right| + C $
+
+	\item $ \int \frac{x}{(ax+b)^2} \md x = \frac{1}{a^2}\left( \ln|ax+b|+\frac{b}{ax+b} \right) + C $
+
+	\item $ \int \frac{x^2}{(ax+b)^2}\md x = \frac{1}{a^3} \left( ax+b-2b\ln|ax+b|-\frac{b^2}{ax+b} \right) + C $
+
+	\item $ \int \frac{\md x}{x(ax+b)^2} = \frac{1}{b(ax+b)} - \frac{1}{b^2}\ln\left| \frac{ax+b}{x} \right| + C $
+
+	\end{enumerate}
+
+	\subsection{$\sqrt{ax+b}$}
+
+	\begin{enumerate}
+
+	\item $ \int \sqrt{ax+b} \mathrm{d}x = \frac{2}{3a} \sqrt{(ax+b)^3} + C $
+
+	\item $ \int x \sqrt{ax+b} \mathrm{d}x = \frac{2}{15a^2}(3ax-2b) \sqrt{(ax+b)^3} + C $
+
+	\item $ \int x^2 \sqrt{ax+b} \mathrm{d}x = \frac{2}{105a^3}(15a^2x^2-12abx+8b^2)\sqrt{(ax+b)^3} + C $
+
+	\item $ \int \frac{x}{\sqrt{ax+b}} \mathrm{d}x = \frac{2}{3a^2} (ax-2b) \sqrt{ax+b} + C $
+
+	\item $ \int \frac{x^2}{\sqrt{ax+b}} \mathrm{d} x = \frac{2}{15a^3} (3a^2x^2 - 4abx + 8b^2) \sqrt{ax+b} + C $
+
+	\item $ \int \frac{\mathrm{d} x}{x\sqrt{ax+b}} = \begin{cases}
+	\frac{1}{\sqrt{b}}\ln\left| \frac{\sqrt{ax+b} - \sqrt{b}}{\sqrt{ax+b} + \sqrt{b}} \right| + C & (b>0) \\
+	\frac{2}{\sqrt{-b}}\arctan\sqrt{\frac{ax+b}{-b}} + C & (b<0)
+	\end{cases} $
+
+	\item $ \int \frac{\mathrm{d} x}{x^2\sqrt{ax+b}} = -\frac{\sqrt{ax+b}}{bx} - \frac{a}{2b} \int \frac{\mathrm{d} x}{x\sqrt{ax+b}} $
+
+	\item $ \int \frac{\sqrt{ax+b}}{x}\mathrm{d} x = 2\sqrt{ax+b} + b\int\frac{\mathrm{d} x}{x\sqrt{ax+b}} $
+
+	\item $ \int \frac{\sqrt{ax+b}}{x^2}\mathrm{d}x = -\frac{\sqrt{ax+b}}{x} + \frac{a}{2} \int \frac{\mathrm{d}x}{x\sqrt{ax+b}} $
+
+	\end{enumerate}
+
+	\subsection{$x^2 \pm a^2$}
+
+	\begin{enumerate}
+
+	\item $ \int \frac{\mathrm{d}x}{x^2 + a^2} = \frac{1}{a} \arctan\frac{x}{a} + C$
+
+	\item $ \int \frac{\mathrm{d}x}{(x^2+a^2)^n} = \frac{x}{2(n-1)a^2(x^2+a^2)^{n-1}}+\frac{2n-3}{2(n-1)a^2} \int \frac{\mathrm{d}x}{(x^2+a^2)^{n-1}} $
+
+	\item $\int \frac{\mathrm{d}x}{x^2-a^2} = \frac{1}{2a}\ln\left| \frac{x-a}{x+a} \right| + C $
+
+
+	\end{enumerate}
+
+\subsection{$ax^2+b$ ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \int \frac{\mathrm{d}x}{ax^2+b} = \begin{cases}
+	\frac{1}{\sqrt{ab}} \arctan \sqrt{\frac{a}{b}} x + C & (b > 0) \\
+	\frac{1}{2\sqrt{-ab}} \ln\left| \frac{\sqrt{a}x-\sqrt{-b}}{\sqrt{a}x+\sqrt{-b}} \right| + C & (b < 0)
+	\end{cases} $
+
+	\item $ \int \frac{x}{ax^2+b} \mathrm{d}x = \frac{1}{2a} \ln \left| ax^2 + b \right| + C $
+
+	\item $ \int \frac{x^2}{ax^2+b} \mathrm{d}x = \frac{x}{a} - \frac{b}{a}\int \frac{\mathrm{d}x}{ax^2+b} $
+
+	\item $ \int \frac{\mathrm{d}x}{x(ax^2+b)} = \frac{1}{2b} \ln \frac{x^2}{|ax^2+b|} + C $
+
+	\item $ \int \frac{\mathrm{d}x}{x^2(ax^2+b)} = -\frac{1}{bx} - \frac{a}{b} \int \frac{\mathrm{d}x}{ax^2+b} $
+
+	\item $ \int \frac{\mathrm{d}x}{x^3(ax^2+b)} = \frac{a}{2b^2} \ln \frac{|ax^2+b|}{x^2} - \frac{1}{2bx^2} + C $
+
+	\item $ \int \frac{\mathrm{d}x}{(ax^2+b)^2} = \frac{x}{2b(ax^2+b)} + \frac{1}{2b} \int \frac{\mathrm{d}x}{ax^2+b} $
+
+	\end{enumerate}
+
+	\subsection{$ax^2+bx+c$ ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \frac{\md x}{ax^2+bx+c} = \begin{cases}
+	\frac{2}{\sqrt{4ac-b^2}}\arctan\frac{2ax+b}{\sqrt{4ac-b^2}} + C & (b^2 < 4ac) \\
+	\frac{1}{\sqrt{b^2-4ac}}\ln\left| \frac{2ax+b-\sqrt{b^2-4ac}}{2ax+b+\sqrt{b^2-4ac}} \right| + C & (b^2 > 4ac)
+	\end{cases} $
+
+	\item $ \int \frac{x}{ax^2+bx+c} \md x = \frac{1}{2a} \ln |ax^2+bx+c| - \frac{b}{2a} \int \frac{\md x}{ax^2+bx+c} $
+
+	\end{enumerate}
+
+	\subsection{$\sqrt{x^2+a^2}$ ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \int \frac{\mathrm{d}x}{\sqrt{x^2+a^2}} = \mathrm{arsh} \frac{x}{a} + C_1 = \ln(x + \sqrt{x^2+a^2}) + C$
+
+	\item $ \int \frac{\mathrm{d}x}{\sqrt{(x^2+a^2)^3}} = \frac{x}{a^2\sqrt{x^2+a^2}} + C $
+
+	\item $ \int \frac{x}{\sqrt{x^2+a^2}} \mathrm{d}x = \sqrt{x^2+a^2} + C $
+
+	\item $ \int \frac{x}{\sqrt{(x^2+a^2)^3}} \mathrm{d}x = -\frac{1}{\sqrt{x^2+a^2}} + C $
+
+	\item $ \int \frac{x^2}{\sqrt{x^2+a^2}} \md x = \frac{x}{2}\sqrt{x^2+a^2} - \frac{a^2}{2}\ln(x+\sqrt{x^2+a^2}) + C $
+
+	\item $ \int \frac{x^2}{\sqrt{(x^2+a^2)^3}} \md x = -\frac{x}{\sqrt{x^2+a^2}} + \ln(x+\sqrt{x^2+a^2}) + C $
+
+	\item $ \int \frac{\md x}{x\sqrt{x^2+a^2}} = \frac{1}{a} \ln \frac{\sqrt{x^2+a^2}-a}{|x|} + C $
+
+	\item $ \int \frac{\md x}{x^2\sqrt{x^2+a^2}} = -\frac{\sqrt{x^2+a^2}}{a^2x} + C $
+
+	\item $ \int \sqrt{x^2+a^2} \md x = \frac{x}{2}\sqrt{x^2+a^2}+\frac{a^2}{2}\ln(x + \sqrt{x^2+a^2}) + C $
+
+	\item $ \int \sqrt{(x^2+a^2)^3} \md x = \frac{x}{8}(2x^2+5a^2)\sqrt{x^2+a^2} + \frac{3}{8}a^4\ln(x + \sqrt{x^2+a^2}) + C $
+
+	\item $ \int x \sqrt{x^2+a^2} \md x = \frac{1}{3} \sqrt{(x^2+a^2)^3} + C $
+
+	\item $ \int x^2\sqrt{x^2+a^2} \md x = \frac{x}{8}(2x^2+a^2)\sqrt{x^2+a^2} - \frac{a^4}{8}\ln(x+\sqrt{x^2+a^2}) + C $
+
+	\item $ \int \frac{\sqrt{x^2+a^2}}{x} \md x = \sqrt{x^2+a^2} + a \ln \frac{\sqrt{x^2+a^2}-a}{|x|} + C $
+
+	\item $ \int \frac{\sqrt{x^2+a^2}}{x^2} \md x = -\frac{\sqrt{x^2+a^2}}{x} + \ln(x + \sqrt{x^2+a^2}) + C $
+
+	\end{enumerate}
+
+	\subsection{$\sqrt{x^2-a^2}$ ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \int \frac{\md x}{\sqrt{x^2-a^2}} = \frac{x}{|x|} \mathrm{arch} \frac{|x|}{a} + C_1 = \ln\left|x+\sqrt{x^2-a^2}\right| + C $
+
+	\item $ \int \frac{\md x}{\sqrt{(x^2-a^2)^3}} = -\frac{x}{a^2\sqrt{x^2-a^2}} + C$
+
+	\item $ \int \frac{x}{\sqrt{x^2-a^2}} \mathrm{d}x = \sqrt{x^2-a^2} + C $
+
+	\item $ \int \frac{x}{\sqrt{(x^2-a^2)^3}} \mathrm{d}x = -\frac{1}{\sqrt{x^2-a^2}} + C $
+
+	\item $ \int \frac{x^2}{\sqrt{x^2-a^2}} \md x = \frac{x}{2}\sqrt{x^2-a^2} + \frac{a^2}{2}\ln|x+\sqrt{x^2-a^2}| + C $
+
+	\item $ \int \frac{x^2}{\sqrt{(x^2-a^2)^3}} \md x = -\frac{x}{\sqrt{x^2-a^2}} + \ln|x+\sqrt{x^2-a^2}| + C $
+
+	\item $ \int \frac{\md x}{x\sqrt{x^2-a^2}} = \frac{1}{a} \arccos \frac{a}{|x|} + C $
+
+	\item $ \int \frac{\md x}{x^2\sqrt{x^2-a^2}} = \frac{\sqrt{x^2-a^2}}{a^2x} + C $
+
+	\item $ \int \sqrt{x^2-a^2} \md x = \frac{x}{2}\sqrt{x^2-a^2} - \frac{a^2}{2}\ln|x + \sqrt{x^2-a^2}| + C $
+
+	\item $ \int \sqrt{(x^2-a^2)^3} \md x = \frac{x}{8}(2x^2-5a^2)\sqrt{x^2-a^2} + \frac{3}{8}a^4\ln|x + \sqrt{x^2-a^2}| + C $
+
+	\item $ \int x \sqrt{x^2-a^2} \md x = \frac{1}{3} \sqrt{(x^2-a^2)^3} + C $
+
+	\item $ \int x^2\sqrt{x^2-a^2} \md x = \frac{x}{8}(2x^2-a^2)\sqrt{x^2-a^2} - \frac{a^4}{8}\ln|x+\sqrt{x^2-a^2}| + C $
+
+	\item $ \int \frac{\sqrt{x^2-a^2}}{x} \md x = \sqrt{x^2-a^2} - a \arccos\frac{a}{|x|} + C $
+
+	\item $ \int \frac{\sqrt{x^2-a^2}}{x^2} \md x = -\frac{\sqrt{x^2-a^2}}{x} + \ln|x + \sqrt{x^2-a^2}| + C $
+
+	\end{enumerate}
+
+	\subsection{$\sqrt{a^2-x^2}$ ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \int \frac{\md x}{\sqrt{a^2-x^2}} = \arcsin \frac{x}{a} + C $
+
+	\item $ \frac{\md x}{\sqrt{(a^2-x^2)^3}} = \frac{x}{a^2\sqrt{a^2-x^2}} + C $
+
+	\item $ \int \frac{x}{\sqrt{a^2-x^2}} \md x = -\sqrt{a^2-x^2} + C $
+
+	\item $ \int \frac{x}{\sqrt{(a^2-x^2)^3}} \md x = \frac{1}{\sqrt{a^2-x^2}} + C $
+
+	\item $ \int \frac{x^2}{\sqrt{a^2-x^2}} \md x = -\frac{x}{2}\sqrt{a^2-x^2} + \frac{a^2}{2}\arcsin\frac{x}{a} + C $
+
+	\item $ \int \frac{x^2}{\sqrt{(a^2-x^2)^3}} \md x = \frac{x}{\sqrt{a^2-x^2}} - \arcsin\frac{x}{a} + C $
+
+	\item $ \int \frac{\md x}{x\sqrt{a^2-x^2}} = \frac{1}{a}\ln\frac{a-\sqrt{a^2-x^2}}{|x|} + C$
+
+	\item $ \int \frac{\md x}{x^2\sqrt{a^2-x^2}} = -\frac{\sqrt{a^2-x^2}}{a^2x} + C $
+
+	\item $ \int \sqrt{a^2-x^2}\md x = \frac{x}{2}\sqrt{a^2-x^2} + \frac{a^2}{2}\arcsin\frac{x}{a} + C $
+
+	\item $ \int \sqrt{(a^2-x^2)^3}\md x = \frac{x}{8}(5a^2-2x^2)\sqrt{a^2-x^2}+\frac{3}{8}a^4\arcsin\frac{x}{a} + C $
+
+	\item $ \int x\sqrt{a^2-x^2}\md x = -\frac{1}{3}\sqrt{(a^2-x^2)^3} + C $
+
+	\item $ \int x^2\sqrt{a^2-x^2}\md x = \frac{x}{8}(2x^2-a^2)\sqrt{a^2-x^2}+\frac{a^4}{8}\arcsin\frac{x}{a} + C $
+
+	\item $ \int \frac{\sqrt{a^2-x^2}}{x}\md x = \sqrt{a^2-x^2} + a \ln \frac{a-\sqrt{a^2-x^2}}{|x|} + C $
+
+	\item $ \int \frac{\sqrt{a^2-x^2}}{x^2} \md x = -\frac{\sqrt{a^2-x^2}}{x} - \arcsin\frac{x}{a} + C $
+
+	\end{enumerate}
+
+	\subsection{$\sqrt{\pm ax^2+bx+c}$ ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \int \frac{\md x}{\sqrt{ax^2+bx+c}} = \frac{1}{\sqrt{a}} \ln | 2ax+b+2\sqrt{a}\sqrt{ax^2+bx+c} | + C $
+
+	\item $ \int \sqrt{ax^2+bx+c} \md x = \frac{2ax+b}{4a}\sqrt{ax^2+bx+c} +
+		\frac{4ac-b^2}{8\sqrt{a^3}}\ln |2ax+b+2\sqrt{a}\sqrt{ax^2+bx+c}| + C $
+
+	\item $ \int \frac{x}{\sqrt{ax^2+bx+c}} \md x = \frac{1}{a}\sqrt{ax^2+bx+c} -
+		\frac{b}{2\sqrt{a^3}}\ln | 2ax+b+2\sqrt{a}\sqrt{ax^2+bx+c} | + C $
+
+	\item $ \int \frac{\md x}{\sqrt{c+bx-ax^2}} = -\frac{1}{\sqrt{a}} \arcsin \frac{2ax-b}{\sqrt{b^2+4ac}} + C  $
+
+	\item \begin{gather*}
+		\int \sqrt{c+bx-ax^2} \md x = \frac{2ax-b}{4a}\sqrt{c+bx-ax^2} +\\
+		\frac{b^2+4ac}{8\sqrt{a^3}}\arcsin\frac{2ax-b}{\sqrt{b^2+4ac}} + C
+	\end{gather*}
+
+	\item $ \int \frac{x}{\sqrt{c+bx-ax^2}} \md x = -\frac{1}{a}\sqrt{c+bx-ax^2} + \frac{b}{2\sqrt{a^3}}\arcsin\frac{2ax-b}{\sqrt{b^2+4ac}} + C $
+
+	\end{enumerate}
+
+	\subsection{$\sqrt{\pm\frac{x-a}{x-b}}$ \& $\sqrt{(x-a)(x-b)}$}
+
+	\begin{enumerate}
+
+	\item $ \int \sqrt\frac{x-a}{x-b} \md x = (x-b)\sqrt\frac{x-a}{x-b} + (b-a)\ln(\sqrt{|x-a|}+\sqrt{|x-b|}) + C $
+
+	\item $ \int \sqrt\frac{x-a}{b-x} \md x = (x-b)\sqrt\frac{x-a}{b-x} + (b-a)\arcsin\sqrt\frac{x-a}{b-x} + C $
+
+	\item $ \int \frac{\md x}{\sqrt{(x-a)(b-x)}} = 2\arcsin\sqrt\frac{x-a}{b-x} + C$ ($a<b$)
+
+	\item $ \int \sqrt{(x-a)(b-x)} \md x = \frac{2x-a-b}{4}\sqrt{(x-a)(b-x)} + \frac{(b-a)^2}{4}\arcsin\sqrt\frac{x-a}{b-x} + C $ ($a<b$)
+
+	\end{enumerate}
+
+	\subsection{Triangular function}
+
+	\begin{enumerate}
+
+	\item $ \int \tan x \md x = -\ln|\cos x| + C $
+
+	\item $ \int \cot x \md x = \ln |\sin x| + C $
+
+	\item $ \int \sec x \md x = \ln \left| \tan\left( \frac{\pi}{4} + \frac{x}{2} \right) \right| + C = \ln |\sec x + \tan x| + C $
+
+	\item $ \int \csc x \md x = \ln \left| \tan\frac{x}{2} \right| + C = \ln |\csc x - \cot x| + C $
+
+	\item $ \int \sec^2 x \md x = \tan x + C $
+
+	\item $ \int \csc^2 x \md x = -\cot x + C $
+
+	\item $ \int \sec x \tan x \md x = \sec x + C $
+
+	\item $ \int \csc x \cot x \md x = -\csc x + C $
+
+	\item $ \int \sin^2 x \md x = \frac{x}{2} - \frac{1}{4} \sin 2x + C $
+
+	\item $ \int \cos^2 x \md x = \frac{x}{2} + \frac{1}{4} \sin 2x + C $
+
+	\item $ \int \sin^n x \md x = -\frac{1}{n} \sin^{n-1} x \cos x + \frac{n-1}{n} \int \sin^{n-2} x \md x $
+
+	\item $ \int \cos^n x \md x = \frac{1}{n} \cos^{n-1} x \sin x + \frac{n-1}{n} \int \cos^{n-2} x \md x $
+
+	\item $ \frac{\md x}{\sin^n x} = -\frac{1}{n-1} \frac{\cos x}{\sin^{n-1}x} + \frac{n-2}{n-1} \int \frac{\md x}{\sin^{n-2}x} $
+
+	\item $ \frac{\md x}{\cos^n x} = \frac{1}{n-1} \frac{\sin x}{\cos^{n-1}x} + \frac{n-2}{n-1} \int \frac{\md x}{\cos^{n-2}x} $
+
+	\item \[ \begin{split} {} & \int \cos^m x \sin^n x \md x \\
+		= & \frac{1}{m+n} \cos^{m-1} x \sin^{n+1}x + \frac{m-1}{m+n}\int\cos^{m-2}x\sin^nx\md x \\
+		= & -\frac{1}{m+n} \cos^{m+1} x \sin^{n-1}x + \frac{n-1}{m+1} \int \cos^m x\sin^{n-2} x \md x \end{split} \]
+
+	\item $ \int \sin ax \cos bx \md x = -\frac{1}{2(a+b)}\cos(a+b)x - \frac{1}{2(a-b)}\cos(a-b)x + C $
+
+	\item $ \int \sin ax \sin bx \md x = -\frac{1}{2(a+b)}\sin(a+b)x + \frac{1}{2(a-b)}\sin(a-b)x + C $
+
+	\item $ \int \cos ax \cos bx \md x =  \frac{1}{2(a+b)}\sin(a+b)x + \frac{1}{2(a-b)}\sin(a-b)x + C $
+
+	\item $ \int \frac{\md x}{a + b \sin x} = \begin{cases}
+	\frac{2}{\sqrt{a^2-b^2}}\arctan\frac{a\tan\frac{x}{2}+b}{\sqrt{a^2-b^2}} + C & (a^2 > b^2) \\
+	\frac{1}{\sqrt{b^2-a^2}}\ln \left| \frac{a\tan\frac{x}{2}+b-\sqrt{b^2-a^2}}{a\tan\frac{x}{2}+b+\sqrt{b^2-a^2}} \right| + C & (a^2 < b^2)
+	\end{cases} $
+
+	\item $ \int \frac{\md x}{a + b \cos x} = \begin{cases}
+	\frac{2}{a+b}\sqrt\frac{a+b}{a-b} \arctan\left(\sqrt\frac{a-b}{a+b}\tan\frac{x}{2}\right) + C & (a^2 > b^2) \\
+	\frac{1}{a+b}\sqrt\frac{a+b}{a-b} \ln \left| \frac{\tan\frac{x}{2}+\sqrt\frac{a+b}{b-a}}{\tan\frac{x}{2}-\sqrt\frac{a+b}{b-a}} \right| + C
+	& (a^2 < b^2)
+	\end{cases} $
+
+	\item $ \int \frac{\md x}{a^2\cos^2x+b^2\sin^2x} = \frac{1}{ab} \arctan\left( \frac{b}{a}\tan x \right) + C $
+
+	\item $ \int \frac{\md x}{a^2\cos^2x-b^2\sin^2x} = \frac{1}{2ab}\ln\left|\frac{b\tan x+a}{b\tan x-a}\right| + C $
+
+	\item $ \int x \sin ax \md x = \frac{1}{a^2} \sin ax - \frac{1}{a} x \cos ax + C $
+
+	\item $ \int x^2 \sin ax \md x = -\frac{1}{a} x^2 \cos ax + \frac{2}{a^2} x \sin ax + \frac{2}{a^3} \cos ax + C$
+
+	\item $ \int x \cos ax \md x = \frac{1}{a^2} \cos ax + \frac{1}{a} x \sin ax + C $
+
+	\item $ \int x^2 \cos ax \md x = \frac{1}{a} x^2 \sin ax + \frac{2}{a^2} x \cos ax - \frac{2}{a^3} \sin ax + C $
+
+	\end{enumerate}
+
+	\subsection{Inverse triangular function ($a>0$)}
+
+	\begin{enumerate}
+
+	\item $ \int \arcsin \frac{x}{a} \md x = x \arcsin \frac{x}{a} + \sqrt{a^2-x^2}+C $
+
+	\item $ \int x \arcsin \frac{x}{a} \md x= (\frac{x^2}{2}-\frac{a^2}{4})\arcsin \frac{x}{a} + \frac{x}{4} \sqrt{x^2-x^2}+C$
+
+	\item $ \int x^2 \arcsin \frac{x}{a} \md x = \frac{x^3}{3}\arcsin \frac{x}{a}+\frac{1}{9}(x^2+2 a^2)\sqrt{a^2-x^2}+C $
+
+	\item $ \int \arccos \frac{x}{a} \md x= x \ arccos \frac{x}{a} - \sqrt{a^2-x^2} +C $
+
+	\item $ \int x \arccos \frac{x}{a} \md x= (\frac{x^2}{2}-\frac{a^2}{4})\arccos \frac{x}{a} - \frac{x}{4} \sqrt{a^2-x^2}+C $
+
+	\item $ \int x^2 \arccos \frac{x}{a}\md x= \frac{x^3}{3}\arccos \frac{x}{a} - \frac{1}{9}(x^2+2a^2)\sqrt{a^2-x^2}+C$
+
+	\item $ \int \arctan \frac{x}{a} \md x=x \arctan \frac{x}{a}-\frac{a}{2}\ln (a^2+x^2)+C $
+
+	\item $ \int x\arctan \frac{x}{a} \md x = \frac{1}{2}(a^2+x^2)\arctan \frac{x}{a} -\frac{a}{2}x+C $
+
+	\item $ \int x^2 \arctan \frac{x}{a} \md x= \frac{x^3}{3} \arctan \frac{x}{a} - \frac{a}{6}x^2 + \frac{a^3}{6} \ln (a^2+x^2)+C $
+
+	\end {enumerate}
+
+	\subsection{Exponential function}
+
+	\begin{enumerate}
+
+	\item $ \int a^x \md x= \frac{1}{\ln a} a^x + C$
+
+	\item $ \int \me ^{ax}\md x=\frac{1}{a}a^{ax}+C $
+
+	\item $ \int x \me  ^ {ax} \md x=\frac{1}{a^2}(ax-1)a^{ax} +C $
+
+	\item $ \int x^n \me ^{ax} \md x=\frac{1}{a}x^n \me ^{ax}-\frac{n}{a} \int x^{n-1} \me ^ {ax} \md x $
+
+	\item $ \int x a^x \md x = \frac{x}{\ln a}a^x-\frac{1}{(\ln a)^2}a^x+C $
+
+	\item $ \int x^n a^x \md x= \frac{1}{\ln a}x^n a^x-\frac{n}{\ln a}\int x^{n-1}a^x \md x $
+
+	\item $ \int \me ^{ax} \sin bx \md x = \frac{1}{a^2+b^2}\me ^{ax}(a \sin bx - b \cos bx)+C $
+
+	\item $ \int \me ^{ax} \cos bx \md x = \frac{1}{a^2+b^2}\me ^{ax}(b \sin bx + a \cos bx)+C $
+
+	\item $ \int \me ^{ax} \sin ^ n bx \md x=\frac{1}{a^2+b^2 n^2}\me ^{ax} \sin ^ {n-1} bx (a \sin bx -nb \cos bx) +\frac{n(n-1)b^2}{a^2+b^2 n^2}\int \me ^{ax} \sin ^{n-2} bx \md x $
+
+	\item $ \int \me ^{ax} \cos ^ n bx \md x=\frac{1}{a^2+b^2 n^2}\me ^{ax} \cos ^ {n-1} bx (a \cos bx +nb \sin bx) +\frac{n(n-1)b^2}{a^2+b^2 n^2}\int \me ^{ax} \cos ^{n-2} bx \md x $
+
+	\end{enumerate}
+
+	\subsection{Logarithmic function}
+
+	\begin{enumerate}
+
+	\item $ \int \ln x \md x = x \ln x - x + C$
+
+	\item $ \int \frac{\md x}{x \ln x} =\ln \big | \ln x \big |+C $
+
+	\item $ \int x^n \ln x \md x = \frac{1}{n+1}x^{n+1}(\ln x - \frac{1}{n+1} ) +C $
+
+	\item $ \int (\ln x)^{n} \md x = x(\ln x)^ n - n \int (\ln x)^{n-1} \md x $
+
+	\item $ \int x ^ m(\ln x)^n \md x=\frac{1}{m+1}x^{m+1} (\ln x)^n - \frac{n}{m+1} \int x^m(\ln x)^{n-1}\md x $
+
+	\end{enumerate}
+
+\section{Prufer Code}
+In combinatorial mathematics, the Prufer sequence of a labeled tree is a unique sequence associated with the tree. The sequence for a tree on $n$ vertices has length $n-2$.
+
+One can generate a labeled tree's Prufer sequence by iteratively removing vertices from the tree until only two vertices remain. Specifically, consider a labeled tree $T$ with vertices ${1, 2, ..., n}$. At step $i$, remove the leaf with the smallest label and set the $i$th element of the Prufer sequence to be the label of this leaf's neighbor.
+
+One can generate a labeled tree from a sequence in three steps. The tree will have $n+2$ nodes, numbered from $1$ to $n+2$. For each node set its degree to the number of times it appears in the sequence plus $1$. Next, for each number in the sequence $a[i]$, find the first (lowest-numbered) node, $j$, with degree equal to $1$, add the edge $(j, a[i])$ to the tree, and decrement the degrees of $j$ and $a[i]$. At the end of this loop two nodes with degree $1$ will remain (call them $u$, $v$). Lastly, add the edge $(u,v)$ to the tree.
+
+The Prufer sequence of a labeled tree on $n$ vertices is a unique sequence of length $n-2$ on the labels $1$ to $n$ - this much is clear. Somewhat less obvious is the fact that for a given sequence $S$ of length $n-2$ on the labels $1$ to $n$, there is a unique labeled tree whose Prufer sequence is $S$.

@@ -10,8 +10,10 @@
 \usepackage{trdpkg}
 \trdcontentdir{content}
 
-\usepackage{titlesec}
-\usepackage{titling}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
 \usepackage{fontspec}
 \usepackage{unicode-math}
 
@@ -22,7 +24,7 @@
 	Extension = .ttf,
 	UprightFont=SourceCodePro-Regular,
 	BoldFont=SourceCodePro-Bold,
-	Scale=0.8
+	Scale=0.9
 ]{Source Code Pro}
 
 \newfontfamily\titlefont[
@@ -34,10 +36,6 @@
 	Path = {./fonts/},
 	Extension = .ttf
 ]{Chivo-Bold}
-
-\titleformat*{\section}{\Large\smalltitle}
-\titleformat*{\subsection}{\large\smalltitle}
-\titleformat*{\subsubsection}{\normalsize\smalltitle}
 
 \setromanfont[
 	Path = {./fonts/},
@@ -64,7 +62,7 @@
 	\setminted{numbersep=1pt}
 	\setminted{xleftmargin=4pt}
 	\setminted{linenos}
-	\setminted{baselinestretch=0.8}
+	\setminted{baselinestretch=0.9}
 	\renewcommand{\theFancyVerbLine}{\textcolor[HTML]{777b7d}{\footnotesize\arabic{FancyVerbLine}}}
 
 	% Small KACTL header on the first page:
@@ -78,18 +76,15 @@
 	\thispagestyle{fancy}
 
 	\trdchapter{contest}
-	% \trdchapter{math}
 	\trdchapter{data-structures}
 	\trdchapter{numerical}
 	\trdchapter{number-theory}
-	%\trdchapter{combinatorial}
 	\trdchapter{graph}
 	\trdchapter{geometry}
 	\trdchapter{strings}
-	% \trdchapter{various}
+	\trdchapter{math}
 	\end{multicols*}
 
 	% \begin{multicols*}{3}
-	% \trdchapter{appendix}
 	% \end{multicols*}
 \end{document}

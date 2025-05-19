@@ -99,7 +99,7 @@ def processwithcomments(caption, instream, outstream, listingslang):
         # Check includes
         include = parse_include(line)
         if include is not None and not keep_include:
-            includelist.append(include)
+            includelist.append(os.path.relpath(include))
             continue
         nlines.append(line)
     # Remove and process multiline comments

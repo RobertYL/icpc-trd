@@ -17,8 +17,12 @@
 \usepackage{graphicx}                   % To rotate page numbers
 \usepackage{fix-cm}                     % Large font sizes
 \usepackage{paralist}                   % For compact enumerations
+
 \usepackage[inline]{enumitem}           % For horizontal lists
-\usepackage[parfill=0pt,skip=2pt]{parskip}           % For compact enumerations
+\setlist{noitemsep}
+\setlist{leftmargin=*}
+
+\usepackage[parfill=0pt,skip=1pt]{parskip}           % For compact enumerations
 \usepackage[dvipsnames]{xcolor}
 \usepackage[normalem]{ulem}
 \usepackage[hidelinks]{hyperref}        % For clickable table of contents
@@ -121,31 +125,31 @@
 }
 
 \def\@makechapterhead#1{
-
-	\parindent \z@ \normalfont
-	% fucks up minted spacing, use paragraphs everywhere instead?
-	% \interlinepenalty\@M
+	\vskip 1pt
+	\titlefont
 	{\underline{\huge \bfseries #1} }
 	\ifnum \c@secnumdepth >\m@ne
 		{\huge\bfseries (\thechapter) \par\nobreak }
 	\fi
+	\normalfont
+	\vskip 1pt
 	\startcontents[chapters]
 }
 
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {-0.5ex \@plus -1ex \@minus -.2ex}%
                                    {.4ex}%
-                                   {\normalfont\LARGE\bfseries}}
+                                   {\smalltitle\LARGE\bfseries}}
 
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}
-	{1ex\@plus -1ex \@minus -.3ex}
-	{.2ex}
-	{\normalfont\large\bfseries}}
+	{1ex \@plus .2ex \@minus 1ex}
+	{1ex \@plus .2ex \@minus 1ex}
+	{\smalltitle\large\bfseries}}
 
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}
-	{1ex\@plus -1ex \@minus -.3ex}
-	{1ex \@plus .2ex}
-	{\normalfont\large\bfseries}}
+	{1ex \@plus .2ex \@minus 1ex}
+	{1ex \@plus .2ex \@minus 1ex}
+	{\smalltitle\large\bfseries}}
 
 % Styles for local toc
 \titlecontents{localsection}[1.5em]{\small}{}
@@ -348,7 +352,7 @@
 
 
 \newcommand{\codeheader}[2]{
-	{\par\noindent\footnotesize{\textbf{#1:} #2}\par}
+	{\par\footnotesize{\textbf{#1:} #2}\par}
 }
 
 \newcommand{\addlistingcaption}{
@@ -360,6 +364,7 @@
 	\tiny
 	\texttt{\@leftcaption} \hfill \@rightcaption\vskip-\baselineskip
 	\hrulefill
+	\footnotesize
 }
 
 \long\def\@makecaption#1#2{
