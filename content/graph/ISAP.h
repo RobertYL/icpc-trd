@@ -51,7 +51,7 @@ struct ISAP {
           u = s;
           while (p != s) {
             p = pre[p];
-            dflow = std::min(dflow, e.flow[cur[p]]);
+            dflow = min(dflow, e.flow[cur[p]]);
           }
           maxflow += dflow;
           p = t;
