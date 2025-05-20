@@ -99,7 +99,7 @@ def processwithcomments(caption, instream, outstream, listingslang):
         # Check includes
         include = parse_include(line)
         if include is not None and not keep_include:
-            includelist.append(os.path.relpath(include))
+            includelist.append(os.path.basename(include))
             continue
         nlines.append(line)
     # Remove and process multiline comments
@@ -181,9 +181,10 @@ def processwithcomments(caption, instream, outstream, listingslang):
         if nsource:
             out.append(r"\rightcaption{%s%d lines}" % (hsh, len(nsource.split("\n"))))
         out.append(r"\addlistingcaption")
-        out.append(r"\begin{minted}{%s}" % listingslang)
-        out.append(nsource)
-        out.append(r"\end{minted}")
+        if len(nsource)>0:
+            out.append(r"\begin{minted}{%s}" % listingslang)
+            out.append(nsource)
+            out.append(r"\end{minted}")
 
     for line in out:
         print(line, file=outstream)
@@ -203,7 +204,7 @@ def processraw(caption, instream, outstream, listingslang = 'raw'):
 def parse_include(line):
     line = line.strip()
     if line.startswith("#include"):
-        return line[8:].strip()
+        return line[8:].strip().strip("\"")
     return None
 
 def getlang(input):
