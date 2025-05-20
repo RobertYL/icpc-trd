@@ -19,7 +19,7 @@ trd: build
 	cp build/trd.pdf trd.pdf
 
 clean:
-	cd build && rm -f trd.aux trd.log trd.tmp trd.toc trd.pdf trd.ptc
+	cd build && rm -rf trd.aux trd.log trd.tmp trd.toc trd.pdf trd.ptc trd.out _minted
 
 deepclean: clean
 	rm -f trd.pdf

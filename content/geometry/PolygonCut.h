@@ -5,7 +5,7 @@
  * Source:
  * Description:\\
 \begin{minipage}{75mm}
- Returns a vector with the vertices of a polygon with everything to the left of the line going from s to e cut away.
+ Returns a vector with the vertices of a polygon with everything to the left of the line going from $s$ to $e$ cut away.
 \end{minipage}
 \begin{minipage}{15mm}
 \vspace{-6mm}
@@ -20,7 +20,7 @@
 #pragma once
 
 #include "Point.h"
-#include "lineIntersection.h"
+#include "LineIntersection.h"
 
 typedef Point<double> P;
 vector<P> polygonCut(const vector<P>& poly, P s, P e) {
