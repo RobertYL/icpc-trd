@@ -12,7 +12,7 @@ It uses products in intermediate steps so watch out for overflow if using int or
 Using Point3D will always give a non-negative distance. For Point3D, call .dist on the result of the cross product.
 \end{minipage}
 \begin{minipage}{15mm}
-\includegraphics[width=\textwidth]{content/geometry/lineDistance}
+\includegraphics[width=\textwidth]{content/geometry/LineDistance}
 \end{minipage}
  * Status: tested
  */

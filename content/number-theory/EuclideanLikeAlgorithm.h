@@ -2,8 +2,7 @@
   * Author: zhtluo
   * Description: Compute $\sum_{i=0}^{n-1}[\frac{a+bi}{m}]$.
   */
-long long solve(
-  long long n, long long a, long long b, long long m) {
+ll solve(ll n, ll a, ll b, ll m) {
   if (b == 0) return n * (a / m);
   if (a >= m) return n * (a / m) + solve(n, a % m, b, m);
   if (b >= m)
