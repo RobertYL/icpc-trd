@@ -30,8 +30,7 @@ vector<F> hull3d(const vector<P3>& A) {
 	vector<F> FS;
 	auto mf = [&](int i, int j, int k, int l) {
 		P3 q = (A[j] - A[i]).cross((A[k] - A[i]));
-		if (q.dot(A[l]) > q.dot(A[i]))
-			q = q * -1;
+		if (q.dot(A[l]) > q.dot(A[i])) q = q * -1;
 		F f{q, i, j, k};
 		E(a,b).ins(k); E(a,c).ins(j); E(b,c).ins(i);
 		FS.push_back(f);
@@ -43,11 +42,8 @@ vector<F> hull3d(const vector<P3>& A) {
 		rep(j,0,sz(FS)) {
 			F f = FS[j];
 			if(f.q.dot(A[i]) > f.q.dot(A[f.a])) {
-				E(a,b).rem(f.c);
-				E(a,c).rem(f.b);
-				E(b,c).rem(f.a);
-				swap(FS[j--], FS.back());
-				FS.pop_back();
+				E(a,b).rem(f.c); E(a,c).rem(f.b); E(b,c).rem(f.a);
+				swap(FS[j--], FS.back()); FS.pop_back();
 			}
 		}
 		int nw = sz(FS);
@@ -55,8 +51,7 @@ vector<F> hull3d(const vector<P3>& A) {
 			F f = FS[j];
 #define C(a, b, c) if (E(a,b).cnt() != 2) mf(f.a, f.b, i, f.c);
 			C(a, b, c); C(a, c, b); C(b, c, a);
-		}
-	}
+		} }
 	for (F& it : FS) if ((A[it.b] - A[it.a]).cross(
 		A[it.c] - A[it.a]).dot(it.q) <= 0) swap(it.c, it.b);
 	return FS;

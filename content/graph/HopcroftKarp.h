@@ -29,8 +29,7 @@ int hopcroftKarp(vector<vi>& g, vi& btoa) {
 	int res = 0;
 	vi A(g.size()), B(btoa.size()), cur, next;
 	for (;;) {
-		fill(all(A), 0);
-		fill(all(B), 0);
+		fill(all(A), 0); fill(all(B), 0);
 		/// Find the starting nodes for BFS (i.e. layer 0).
 		cur.clear();
 		for (int a : btoa) if(a != -1) A[a] = -1;
@@ -47,15 +46,13 @@ int hopcroftKarp(vector<vi>& g, vi& btoa) {
 				else if (btoa[b] != a && !B[b]) {
 					B[b] = lay;
 					next.push_back(btoa[b]);
-				}
-			}
+				} }
 			if (islast) break;
 			if (next.empty()) return res;
 			for (int a : next) A[a] = lay;
 			cur.swap(next);
 		}
 		/// Use DFS to scan for augmenting paths.
-		rep(a,0,sz(g))
-			res += dfs(a, 0, g, btoa, A, B);
+		rep(a,0,sz(g)) res += dfs(a, 0, g, btoa, A, B);
 	}
 }

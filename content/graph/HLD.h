@@ -15,7 +15,7 @@
  */
 #pragma once
 
-#include "../data-structures/LazySegmentTree.h"
+#include "../data-structures/KactlLazySegmentTree.h"
 
 template <bool VALS_EDGES> struct HLD {
 	int N, tim = 0;

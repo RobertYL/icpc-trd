@@ -10,7 +10,7 @@
  * vvd A = {{1,-1}, {-1,1}, {-1,-2}};
  * vd b = {1,1,-4}, c = {-1,-1}, x;
  * T val = LPSolver(A, b, c).solve(x);
- * Time: O(NM * \#pivots), where a pivot may be e.g. an edge relaxation. O(2^n) in the general case.
+ * Time: O(NM \times \mathrm{\#piv}), where a pivot may be e.g. an edge relaxation. O(2^n) in general.
  * Status: seems to work?
  */
 #pragma once
@@ -24,9 +24,7 @@ const T eps = 1e-8, inf = 1/.0;
 #define ltj(X) if(s == -1 || MP(X[j],N[j]) < MP(X[s],N[s])) s=j
 
 struct LPSolver {
-	int m, n;
-	vi N, B;
-	vvd D;
+	int m, n; vi N, B; vvd D;
 
 	LPSolver(const vvd& A, const vd& b, const vd& c) :
 		m(sz(b)), n(sz(c)), N(n+1), B(m), D(m+2, vd(n+2)) {

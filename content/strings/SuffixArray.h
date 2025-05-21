@@ -35,7 +35,6 @@ struct SuffixArray {
 				(y[a] == y[b] && y[a + j] == y[b + j]) ? p - 1 : p++;
 		}
 		for (int i = 0, j; i < n - 1; lcp[x[i++]] = k)
-			for (k && k--, j = sa[x[i] - 1];
-					s[i + k] == s[j + k]; k++);
+			for (k && k--, j = sa[x[i] - 1]; s[i + k] == s[j + k]; k++);
 	}
 };

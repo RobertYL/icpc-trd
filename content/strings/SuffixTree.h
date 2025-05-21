@@ -18,7 +18,6 @@ struct SuffixTree {
 	int toi(char c) { return c - 'a'; }
 	string a; // v = cur node, q = cur position
 	int t[N][ALPHA],l[N],r[N],p[N],s[N],v=0,q=0,m=2;
-
 	void ukkadd(int i, int c) { suff:
 		if (r[v]<=q) {
 			if (t[v][c]==-1) { t[v][c]=m;  l[m]=i;
@@ -35,16 +34,12 @@ struct SuffixTree {
 			q=r[v]-(q-r[m]);  m+=2;  goto suff;
 		}
 	}
-
 	SuffixTree(string a) : a(a) {
-		fill(r,r+N,sz(a));
-		memset(s, 0, sizeof s);
-		memset(t, -1, sizeof t);
-		fill(t[1],t[1]+ALPHA,0);
+		fill(r,r+N,sz(a)); memset(s, 0, sizeof s);
+		memset(t, -1, sizeof t); fill(t[1],t[1]+ALPHA,0);
 		s[0] = 1; l[0] = l[1] = -1; r[0] = r[1] = p[0] = p[1] = 0;
 		rep(i,0,sz(a)) ukkadd(i, toi(a[i]));
 	}
-
 	// example: find longest common substring (uses ALPHA = 28)
 	pii best;
 	int lcs(int node, int i1, int i2, int olen) {
@@ -53,8 +48,7 @@ struct SuffixTree {
 		int mask = 0, len = node ? olen + (r[node] - l[node]) : 0;
 		rep(c,0,ALPHA) if (t[node][c] != -1)
 			mask |= lcs(t[node][c], i1, i2, len);
-		if (mask == 3)
-			best = max(best, {len, r[node] - len});
+		if (mask == 3) best = max(best, {len, r[node] - len});
 		return mask;
 	}
 	static pii LCS(string s, string t) {

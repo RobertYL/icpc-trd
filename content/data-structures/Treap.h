@@ -11,8 +11,7 @@
 #pragma once
 
 struct Node {
-	Node *l = 0, *r = 0;
-	int val, y, c = 1;
+	Node *l = 0, *r = 0; int val, y, c = 1;
 	Node(int val) : val(val), y(rand()) {}
 	void recalc();
 };
@@ -28,28 +27,21 @@ pair<Node*, Node*> split(Node* n, int k) {
 	if (!n) return {};
 	if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
 		auto pa = split(n->l, k);
-		n->l = pa.second;
-		n->recalc();
+		n->l = pa.second; n->recalc();
 		return {pa.first, n};
 	} else {
 		auto pa = split(n->r, k - cnt(n->l) - 1); // and just "k"
-		n->r = pa.first;
-		n->recalc();
+		n->r = pa.first; n->recalc();
 		return {n, pa.second};
 	}
 }
 
 Node* merge(Node* l, Node* r) {
-	if (!l) return r;
-	if (!r) return l;
+	if (!l) return r; if (!r) return l;
 	if (l->y > r->y) {
-		l->r = merge(l->r, r);
-		l->recalc();
-		return l;
+		l->r = merge(l->r, r); l->recalc(); return l;
 	} else {
-		r->l = merge(l, r->l);
-		r->recalc();
-		return r;
+		r->l = merge(l, r->l); r->recalc(); return r;
 	}
 }
 

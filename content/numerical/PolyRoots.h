@@ -16,8 +16,7 @@ vector<double> polyRoots(Poly p, double xmin, double xmax) {
 	Poly der = p;
 	der.diff();
 	auto dr = polyRoots(der, xmin, xmax);
-	dr.push_back(xmin-1);
-	dr.push_back(xmax+1);
+	dr.push_back(xmin-1); dr.push_back(xmax+1);
 	sort(all(dr));
 	rep(i,0,sz(dr)-1) {
 		double l = dr[i], h = dr[i+1];
@@ -29,7 +28,6 @@ vector<double> polyRoots(Poly p, double xmin, double xmax) {
 				else h = m;
 			}
 			ret.push_back((l + h) / 2);
-		}
-	}
+		} }
 	return ret;
 }
