@@ -1,69 +1,57 @@
 /**
-	* Author: zhtluo
-  * Description: \begin{enumerate}
-  * \item \mintinline{cpp}|cut|: Online in $O(n^2)$.
-  * \item \mintinline{cpp}|half_plane_intersect|: Offline in $O(mlogm)$.
-  * \end{enumerate}
-  * Time: O(n^2) for cut online, O(m\log{m}) for halfPlane
+	* Author: RobertYL
+  * Description: Intersect left half planes defined by s and t.
+  * Consider adding a bounding box. Hull may degenerate to a point.
+  * Time: O(n\log{n})
   */
 
-vector<point> cut( const vector<point> &c, line p) {
-  vector<point> ret;
-  if(c.empty()) return ret;
-  rep(i, 0, sz(c)) {
-    int j = (i + 1) % sz(c);
-    if(turn_left(p.s, p.t, c[i])) ret.push_back(c[i]);
-    if(two_side(c[i], c[j], p))
-      ret.push_back(line_intersect(p, line(c[i], c[j])));
+#include "Point.h"
+
+#define eps 1e-9
+template<class P>
+struct HP {
+  P s, t;
+  double a;
+  explicit HP(P s=P(), P t=P()) : s(s), t(t) {
+    a = atan2((t-s).y, (t-s).x);
   }
-  return ret;
-}
-
-bool turn_left(cl l, cp p) { return sgn(det(l.t - l.s, p - l.s)) >= 0; }
-
-int cmp(cp a, cp b) {
-  return a.dim() != b.dim() ? (a.dim() < b.dim() ? -1 : 1)
-                            : -sgn(det(a, b));
-}
-
-vector<point> half_plane_intersect(vector<line> h) {
-  typedef pair<point, line> polar;
-  vector<polar> g;
-  g.resize(h.size());
-  rep(i, 0, sz(h)) g[i] = make_pair(h[i].t - h[i].s, h[i]);
-  sort(all(g),
-    [&](const polar &a, const polar &b) {
-      if(cmp(a.first, b.first) == 0)
-        return sgn(det(a.second.t - a.second.s, b.second.t - a.second.s)) < 0;
-      else
-        return cmp(a.first, b.first) < 0;
-    });
-  h.resize(unique(all(g), [](const polar &a, const polar &b) {
-        return cmp(a.first, b.first) == 0; }) - g.begin());
-  for (int i = 0; i < (int)h.size(); ++i)
-    h[i] = g[i].second;
-  int fore = 0, rear = -1;
-  vector<line> ret(h.size(), line());
-  rep(i, 0, sz(h)) {
-    while(fore < rear &&
-        !turn_left( h[i], line_intersect(ret[rear - 1], ret[rear])))
-      --rear;
-    while(fore < rear &&
-        !turn_left( h[i], line_intersect(ret[fore], ret[fore + 1])))
-      ++fore;
-    ret[++rear] = h[i];
+  bool operator==(const HP &hp) const {
+    return fabs(a - hp.a) < eps;
   }
-  while (rear - fore > 1 &&
-    !turn_left(
-      ret[fore], line_intersect(ret[rear - 1], ret[rear])))
-    --rear;
-  while (rear - fore > 1 &&
-    !turn_left(
-      ret[rear], line_intersect(ret[fore], ret[fore + 1])))
-    ++fore;
-  if (rear - fore < 2) return vector<point>();
-  vector<point> ans; ans.resize(rear + 1);
-  rep(i, 0, rear+1)
-    ans[i] = line_intersect(ret[i], ret[(i + 1) % (rear + 1)]);
-  return ans;
+  bool operator<(const HP &hp) const {
+    if(fabs(a - hp.a) < eps)
+      return sgn((t-s).cross(hp.s-s)) < 0;
+    return a < hp.a;
+  }
+  bool out(const P &p) const { // check if outside HP
+    return (t-s).cross(p-s) < -eps;
+  }
+  P inter(const HP &hp) const { // assume never parallel
+    auto d = (t-s).cross(hp.t-hp.s); // d != 0
+    auto p = hp.s.cross(t, hp.t), q = hp.s.cross(hp.t, s);
+    return (s * p + t * q) / d;
+  }
+};
+
+template<class P>
+vector<P> halfPlaneInter(vector<HP<P>> &hp){
+  sort(all(hp)); hp.erase(unique(all(hp)), hp.end());
+
+  deque<HP<P>> dq; int ln = 0;
+  rep(i, 0, sz(hp)) {
+    while(ln > 1 && hp[i].out(dq[ln-1].inter(dq[ln-2])))
+      dq.pop_back(), --ln;
+    while(ln > 1 && hp[i].out(dq[0].inter(dq[1])))
+      dq.pop_front(), --ln;
+    dq.push_back(hp[i]), ++ln;
+  }
+  while(ln > 2 && dq[0].out(dq[ln-1].inter(dq[ln-2])))
+    dq.pop_back(), --ln;
+  while(ln > 2 && dq[ln-1].out(dq[0].inter(dq[1])))
+    dq.pop_front(), --ln;
+  vector<P> res;
+  if(ln < 3) return res;
+  rep(i, 0, ln) res.push_back(dq[i].inter(dq[(i+1)%ln]));
+  return res;
 }
+
