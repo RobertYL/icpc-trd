@@ -12,7 +12,7 @@
 template <int MAXN = 1000, int MAXM = 100000>
 struct Dinic {
   struct FlowEdgeList {
-    int size, begin[MAXN], dest[MAXM], next[MAXM]; ll flow[MAXM];
+    int size, begin[MAXN],dest[MAXM],next[MAXM]; ll flow[MAXM];
     void clear(int n) { size = 0; fill(begin, begin + n, -1); }
     FlowEdgeList (int n = MAXN) { clear(n); }
     void addEdge(int u, int v, ll f) {

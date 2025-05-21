@@ -22,12 +22,12 @@ vector<ll> berlekampMassey(vector<ll> s) {
 	C[0] = B[0] = 1;
 
 	ll b = 1;
-	for( int i = 0; i < n; i++ ) { ++m;
+  rep(i, 0, n) { ++m;
 		ll d = s[i]%mod;
-        for( int j = 1; j <= L; j++ ) d = (d + C[j] * s[i - j])%mod;
+    rep(j, 1, L) d = (d + C[j] * s[i - j])%mod;
 		if (!d) continue;
 		T = C; ll coef = d*modpow(b, mod-2)%mod;
-        for( int j = m; j < n; j++ ) C[j] = (C[j] - coef * B[j - m])%mod;
+    rep(j, m, n) C[j] = (C[j] - coef * B[j - m])%mod;
 		if (2*L > i) continue;
 		L = i + 1 - L; B = T; b = d; m = 0;
 	}

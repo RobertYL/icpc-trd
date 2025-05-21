@@ -4,7 +4,7 @@
  * License: CC0
  * Source: Basic math
  * Description:\\
-\begin{minipage}{75mm}
+\begin{minipage}{70mm}
 Returns the signed distance between point p and the line containing points a and b.
 Positive value on left side and negative on right as seen from a towards b. a==b gives nan.
 P is supposed to be Point<T> or Point3D<T> where T is e.g. double or long long.

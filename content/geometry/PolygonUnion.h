@@ -32,9 +32,7 @@ double polyUnion(vector<vector<P>>& poly) {
 				} else if (!sc && !sd && j<i && sgn((B-A).dot(D-C))>0){
 					segs.emplace_back(rat(C - A, B - A), 1);
 					segs.emplace_back(rat(D - A, B - A), -1);
-				}
-			}
-		}
+				} } }
 		sort(all(segs));
 		for (auto& s : segs) s.first = min(max(s.first, 0.0), 1.0);
 		double sum = 0;

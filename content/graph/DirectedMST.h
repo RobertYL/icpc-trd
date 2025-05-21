@@ -15,9 +15,7 @@
 
 struct Edge { int a, b; ll w; };
 struct Node { /// lazy skew heap node
-	Edge key;
-	Node *l, *r;
-	ll delta;
+	Edge key; Node *l, *r; ll delta;
 	void prop() {
 		key.w += delta;
 		if (l) l->delta += delta;
@@ -36,8 +34,7 @@ Node *merge(Node *a, Node *b) {
 void pop(Node*& a) { a->prop(); a = merge(a->l, a->r); }
 
 pair<ll, vi> dmst(int n, int r, vector<Edge>& g) {
-	RollbackUF uf(n);
-	vector<Node*> heap(n);
+	RollbackUF uf(n); vector<Node*> heap(n);
 	for (Edge e : g) heap[e.b] = merge(heap[e.b], new Node{e});
 	ll res = 0;
 	vi seen(n, -1), path(n), par(n);

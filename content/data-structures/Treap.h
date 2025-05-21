@@ -15,14 +15,12 @@ struct Node {
 	Node(int val) : val(val), y(rand()) {}
 	void recalc();
 };
-
 int cnt(Node* n) { return n ? n->c : 0; }
 void Node::recalc() { c = cnt(l) + cnt(r) + 1; }
 
 template<class F> void each(Node* n, F f) {
 	if (n) { each(n->l, f); f(n->val); each(n->r, f); }
 }
-
 pair<Node*, Node*> split(Node* n, int k) {
 	if (!n) return {};
 	if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
@@ -35,7 +33,6 @@ pair<Node*, Node*> split(Node* n, int k) {
 		return {n, pa.second};
 	}
 }
-
 Node* merge(Node* l, Node* r) {
 	if (!l) return r; if (!r) return l;
 	if (l->y > r->y) {
@@ -44,12 +41,10 @@ Node* merge(Node* l, Node* r) {
 		r->l = merge(l, r->l); r->recalc(); return r;
 	}
 }
-
 Node* ins(Node* t, Node* n, int pos) {
 	auto [l,r] = split(t, pos);
 	return merge(merge(l, n), r);
 }
-
 // Example application: move the range [l, r) to index k
 void move(Node*& t, int l, int r, int k) {
 	Node *a, *b, *c;
