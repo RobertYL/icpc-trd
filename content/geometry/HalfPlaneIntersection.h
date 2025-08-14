@@ -7,51 +7,47 @@
 
 #include "Point.h"
 
-#define eps 1e-9
+const double eps = 1e-9;
+int sgn(double x) { return (x > eps) - (x < -eps); }
 template<class P>
-struct HP {
+struct L {
   P s, t;
   double a;
-  explicit HP(P s=P(), P t=P()) : s(s), t(t) {
-    a = atan2((t-s).y, (t-s).x);
-  }
-  bool operator==(const HP &hp) const {
-    return fabs(a - hp.a) < eps;
-  }
-  bool operator<(const HP &hp) const {
-    if(fabs(a - hp.a) < eps)
-      return sgn((t-s).cross(hp.s-s)) < 0;
-    return a < hp.a;
+  explicit L(P s=P(), P t=P()) : s(s), t(t), a((t-s).angle()) {}
+  bool operator==(const L &l) const { return sgn(a-l.a) == 0; }
+  bool operator<(const L &l) const {
+    if(sgn(a-l.a) == 0) return sgn((t-s).cross(l.s-s)) < 0;
+    return a < l.a;
   }
   bool out(const P &p) const { // check if outside HP
-    return (t-s).cross(p-s) < -eps;
+    return sgn((t-s).cross(p-s)/(t-s).dist()) < 0; // < 1 for degen case
   }
-  P inter(const HP &hp) const { // assume never parallel
-    auto d = (t-s).cross(hp.t-hp.s); // d != 0
-    auto p = hp.s.cross(t, hp.t), q = hp.s.cross(hp.t, s);
+  P inter(const L &l) const { // assume never parallel
+    auto d = (t-s).cross(l.t-l.s); // d != 0
+    auto p = l.s.cross(t, l.t), q = l.s.cross(l.t, s);
     return (s * p + t * q) / d;
   }
 };
 
 template<class P>
-vector<P> halfPlaneInter(vector<HP<P>> &hp){
-  sort(all(hp)); hp.erase(unique(all(hp)), hp.end());
+vector<P> HPI(vector<L<P>> &l){
+  sort(all(l)); l.erase(unique(all(l)), l.end());
 
-  deque<HP<P>> dq; int ln = 0;
-  rep(i, 0, sz(hp)) {
-    while(ln > 1 && hp[i].out(dq[ln-1].inter(dq[ln-2])))
-      dq.pop_back(), --ln;
-    while(ln > 1 && hp[i].out(dq[0].inter(dq[1])))
-      dq.pop_front(), --ln;
-    dq.push_back(hp[i]), ++ln;
+  deque<L<P>> dq; int sz = 0;
+  rep(i, 0, sz(l)) {
+    while(sz > 1 && l[i].out(dq[sz-1].inter(dq[sz-2])))
+      dq.pop_back(), --sz;
+    while(sz > 1 && l[i].out(dq[0].inter(dq[1])))
+      dq.pop_front(), --sz;
+    dq.push_back(l[i]), ++sz;
   }
-  while(ln > 2 && dq[0].out(dq[ln-1].inter(dq[ln-2])))
-    dq.pop_back(), --ln;
-  while(ln > 2 && dq[ln-1].out(dq[0].inter(dq[1])))
-    dq.pop_front(), --ln;
+  while(sz > 2 && dq[0].out(dq[sz-1].inter(dq[sz-2])))
+    dq.pop_back(), --sz;
+  while(sz > 2 && dq[sz-1].out(dq[0].inter(dq[1])))
+    dq.pop_front(), --sz;
+  if(sz < 3) return {};
   vector<P> res;
-  if(ln < 3) return res;
-  rep(i, 0, ln) res.push_back(dq[i].inter(dq[(i+1)%ln]));
+  rep(i, 0, sz) res.push_back(dq[i].inter(dq[(i+1)%sz]));
   return res;
 }
 
