@@ -9,7 +9,7 @@
  */
 #pragma once
 
-const int N = 1000, M = 1000000;
+const int N = 1000, M = 100000;
 struct E {
   int sz, begin[N], dest[M], next[M]; ll flow[M];
   void clear(int n) { sz = 0; fill(begin, begin+n, -1); }
