@@ -795,3 +795,48 @@ One can generate a labeled tree's Prufer sequence by iteratively removing vertic
 One can generate a labeled tree from a sequence in three steps. The tree will have $n+2$ nodes, numbered from $1$ to $n+2$. For each node set its degree to the number of times it appears in the sequence plus $1$. Next, for each number in the sequence $a[i]$, find the first (lowest-numbered) node, $j$, with degree equal to $1$, add the edge $(j, a[i])$ to the tree, and decrement the degrees of $j$ and $a[i]$. At the end of this loop two nodes with degree $1$ will remain (call them $u$, $v$). Lastly, add the edge $(u,v)$ to the tree.
 
 The Prufer sequence of a labeled tree on $n$ vertices is a unique sequence of length $n-2$ on the labels $1$ to $n$ - this much is clear. Somewhat less obvious is the fact that for a given sequence $S$ of length $n-2$ on the labels $1$ to $n$, there is a unique labeled tree whose Prufer sequence is $S$.
+
+\section{Numbers}
+	\subsection{Factorial}
+		\import{factorial.tex}
+		\trdimport{IntPerm.h}
+
+	\subsection{Derangements}
+		Permutations of a set such that none of the elements appear in their original position.
+		\[ \mkern-2mu D(n) = (n-1)(D(n-1)+D(n-2)) = n D(n-1)+(-1)^n = \left\lfloor\frac{n!}{e}\right\rceil \]
+
+  \subsection{Partition function}
+		Number of ways of writing $n$ as a sum of positive integers, disregarding the order of the summands.
+		\[ p(0) = 1,\ p(n) = \sum_{k \in \mathbb Z \setminus \{0\}}{(-1)^{k+1} p(n - k(3k-1) / 2)} \]
+		\[ p(n) \sim 0.145 / n \cdot \exp(2.56 \sqrt{n}) \]
+
+		\begin{center}
+		\begin{tabular}{c|c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c}
+      $n$    & 0 & 1 & 2 & 3 & 4 & 5 & 6  & 7  & 8  & 9  & 20  & 30  & 50  & 100 \\ \hline
+      $p(n)$ & 1 & 1 & 2 & 3 & 5 & 7 & 11 & 15 & 22 & 30 & 627 & 5604 & $\mathtt{\sim}$2e5 & $\mathtt{\sim}$2e8 \\
+		\end{tabular}
+		\end{center}
+
+	\subsection{Lucas' Theorem}
+		Let $n,m$ be non-negative integers and $p$ a prime. Write $n=n_kp^k+...+n_1p+n_0$ and $m=m_kp^k+...+m_1p+m_0$. Then $\binom{n}{m} \equiv \prod_{i=0}^k\binom{n_i}{m_i} \pmod{p}$.
+
+  \subsection{Bell numbers}
+		Total number of partitions of $n$ distinct elements. $B(n) =$
+		$1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, \dots$. For $p$ prime,
+		\[ B(p^m+n)\equiv mB(n)+B(n+1) \pmod{p} \]
+
+	\subsection{Labeled unrooted trees}
+		\# on $n$ vertices: $n^{n-2}$ \\
+		\# on $k$ existing trees of size $n_i$: $n_1n_2\cdots n_k n^{k-2}$ \\
+		\# with degrees $d_i$: $(n-2)! / ((d_1-1)! \cdots (d_n-1)!)$
+
+	\subsection{Catalan numbers}
+		\[ C_n=\frac{1}{n+1}\binom{2n}{n}= \binom{2n}{n}-\binom{2n}{n+1} = \frac{(2n)!}{(n+1)!n!} \]
+		\[ C_0=1,\ C_{n+1} = \frac{2(2n+1)}{n+2}C_n,\ C_{n+1}=\sum C_iC_{n-i} \]
+		${C_n = 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, \dots}$
+    
+  \subsection{Wilbert numbers}
+    $\binom{20}{10} = 184576$ \\
+    $\binom{30}{15} = 155117520$ \\
+    $3^17 = 129140163$
+
