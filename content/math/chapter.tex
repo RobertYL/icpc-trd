@@ -263,6 +263,7 @@ The expected time until absorption, when the initial state is $i$, is $t_i = 1+\
 	\[ L_0=2,L_1=1,L_n=L_{n-1}+L_{n-2}=(\frac{1+\sqrt{5}}{2})^n+\frac{1-\sqrt{5}}{2})^n \]
 	\[ L(x)=\frac{2-x}{1-x-x^2} \]
 	\subsection{Catalan numbers}
+  ${c_n = 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, \dots}$
 	\begin{align*}
 	c_1=1,c_n=\sum_{i=0}^{n-1}c_ic_{n-1-i}=c_{n-1}\frac{4n-2}{n+1}=\frac{\binom{2n}{n}}{n+1}\\
 	=\binom{2n}{n}-\binom{2n}{n-1}, c(x)=\frac{1-\sqrt{1-4x}}{2x}
@@ -309,7 +310,9 @@ The expected time until absorption, when the initial state is $i$, is $t_i = 1+\
 	\[ p(n) = p(n-1)+p(n-2)-p(n-5)-p(n-7)+\cdots \]
 	\[ f(n, k) = p(n)-p(n-k)-p(n-2k)+p(n-5k)+p(n-7k)-\cdots \]
 	\subsection{Bell numbers}
-	Divide a set that has exactly n elements.
+  Total number of partitions of $n$ distinct elements. $B(n) =$
+  $1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, \dots$. For $p$ prime,
+  \[ B(p^m+n)\equiv mB(n)+B(n+1) \pmod{p} \]
 	\[ B_n=\sum_{k=1}^{n}{n\brace k},\ \ B_{n+1} = \sum_{k=0}^n{n \choose k}B_k \]
 	\[ B_{p^m+n} \equiv mB_n+B_{n+1} \pmod{p} \]
 	\[B(x)=\sum_{n=0}^{\infty}\frac{B_n}{n!}x^n=\mathrm{e}^{\mathrm{e}^x-1}\]
@@ -332,6 +335,8 @@ The expected time until absorption, when the initial state is $i$, is $t_i = 1+\
 	\end{aligned}\right.\]
 	$r_3(n)>0$ when and only when $n$ is not $4^a(8b+7)$.
 	\subsection{Derangement}
+  Permutations of a set such that none of the elements appear in their original position.
+  \[ \mkern-2mu D(n) = (n-1)(D(n-1)+D(n-2)) = n D(n-1)+(-1)^n = \left\lfloor\frac{n!}{e}\right\rceil \]
 	\[D_1=0,D_2=1,D_n=n!(\frac{1}{0!}-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+...+\frac{(-1)^n}{n!})\]
 	\[D_n=(n-1)(D_{n-1}+D_{n-2})\]
 	\subsection{Labeled unrooted trees}
@@ -801,10 +806,6 @@ The Prufer sequence of a labeled tree on $n$ vertices is a unique sequence of le
 		\import{factorial.tex}
 		\trdimport{IntPerm.h}
 
-	\subsection{Derangements}
-		Permutations of a set such that none of the elements appear in their original position.
-		\[ \mkern-2mu D(n) = (n-1)(D(n-1)+D(n-2)) = n D(n-1)+(-1)^n = \left\lfloor\frac{n!}{e}\right\rceil \]
-
   \subsection{Partition function}
 		Number of ways of writing $n$ as a sum of positive integers, disregarding the order of the summands.
 		\[ p(0) = 1,\ p(n) = \sum_{k \in \mathbb Z \setminus \{0\}}{(-1)^{k+1} p(n - k(3k-1) / 2)} \]
@@ -817,24 +818,6 @@ The Prufer sequence of a labeled tree on $n$ vertices is a unique sequence of le
 		\end{tabular}
 		\end{center}
 
-	\subsection{Lucas' Theorem}
-		Let $n,m$ be non-negative integers and $p$ a prime. Write $n=n_kp^k+...+n_1p+n_0$ and $m=m_kp^k+...+m_1p+m_0$. Then $\binom{n}{m} \equiv \prod_{i=0}^k\binom{n_i}{m_i} \pmod{p}$.
-
-  \subsection{Bell numbers}
-		Total number of partitions of $n$ distinct elements. $B(n) =$
-		$1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, \dots$. For $p$ prime,
-		\[ B(p^m+n)\equiv mB(n)+B(n+1) \pmod{p} \]
-
-	\subsection{Labeled unrooted trees}
-		\# on $n$ vertices: $n^{n-2}$ \\
-		\# on $k$ existing trees of size $n_i$: $n_1n_2\cdots n_k n^{k-2}$ \\
-		\# with degrees $d_i$: $(n-2)! / ((d_1-1)! \cdots (d_n-1)!)$
-
-	\subsection{Catalan numbers}
-		\[ C_n=\frac{1}{n+1}\binom{2n}{n}= \binom{2n}{n}-\binom{2n}{n+1} = \frac{(2n)!}{(n+1)!n!} \]
-		\[ C_0=1,\ C_{n+1} = \frac{2(2n+1)}{n+2}C_n,\ C_{n+1}=\sum C_iC_{n-i} \]
-		${C_n = 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, \dots}$
-    
   \subsection{Wilbert numbers}
     $\binom{20}{10} = 184576$ \\
     $\binom{30}{15} = 155117520$ \\
