@@ -3,6 +3,7 @@
 \trdimport[-l rawcpp]{template.cpp}
 \trdimport[-l sh]{.bashrc}
 \trdimport[-l raw]{.vimrc}
+\trdimport[-l raw]{.tmux.conf}
 \trdimport[-l raw]{hash.sh}
 \trdimport[-l raw]{troubleshoot.txt}
 \trdimport{Random.h}
@@ -11,5 +12,5 @@
 	\begin{itemize}
 		\item \lstinline{#pragma GCC optimize ("Ofast")} will make GCC auto-vectorize loops and optimizes floating points better.
 		\item \lstinline{#pragma GCC target ("avx2")} can double performance of vectorized code, but causes crashes on old machines.
-		\item \lstinline{#pragma GCC optimize ("trapv")} kills the program on integer overflows (but is really slow).
+		\item \lstinline{#pragma GCC optimize ("trapv")} kills the program on integer overflows.
 	\end{itemize}
